@@ -54,6 +54,17 @@
             url = "https://coreboot.org/releases/coreboot-${coreboot_version}.tar.xz";
             hash = "sha256-4ir9usQAaLpof9l18D9rlYWZoy5w9TnZ0MdNFqY9fOo=";
           };
+          coreboot_blobs_tarball = pkgs.fetchurl {
+            url = "https://coreboot.org/releases/coreboot-blobs-${coreboot_version}.tar.xz";
+            hash = "sha256-0jaBacub79EPmv/pv3Zj5v84uArldyUV8I1LRyUKOoM=";
+          };
+          edk2 = pkgs.fetchFromGitHub {
+            owner = "tianocore";
+            repo = "edk2";
+            rev = "tags/edk2-stable202402";
+            hash = "sha256-/betKAMBP+Zy1pKhlS+LIyeMwOFrJEsugxHG8VlCEPQ=";
+            leaveDotGit = true;
+          };
         in
 
         rec {
@@ -87,6 +98,8 @@
                 pkg-config
                 ncurses
                 ncurses.dev
+                libuuid
+                libuuid.dev
                 perl
                 tree
               ];
@@ -95,14 +108,7 @@
             pname = "coreboot-toolchain";
             version = coreboot_version;
 
-            src =
-              let
-                coreboot_version = "24.05";
-              in
-              pkgs.fetchurl {
-                url = "https://coreboot.org/releases/coreboot-${coreboot_version}.tar.xz";
-                hash = "sha256-4ir9usQAaLpof9l18D9rlYWZoy5w9TnZ0MdNFqY9fOo=";
-              };
+            src = coreboot_tarball;
 
             # Because the binaries that are build in the chroot reference
             # shared libraries in a way that will not work outside of it, we
@@ -119,9 +125,13 @@
             nativeBuildInputs = [
               corebootEnv
               pkgs.autoPatchelfHook
+              pkgs.libuuid
+              pkgs.libuuid.dev
             ];
             buildInputs = [
               pkgs.zlib
+              pkgs.libuuid
+              pkgs.libuuid.dev
               pkgs.flex
               pkgs.gcc.cc.lib
             ];
@@ -166,17 +176,43 @@
             pname = "coreboot";
             version = coreboot_version;
 
-            src = coreboot_tarball;
+            srcs = [
+              coreboot_tarball
+              coreboot_blobs_tarball
+              edk2
+            ];
+            sourceRoot = "coreboot-${coreboot_version}";
 
-            nativeBuildInputs = [ corebootToolchain ];
+            nativeBuildInputs = [
+              corebootToolchain
+              pkgs.pkg-config
+              pkgs.nss
+              pkgs.python3
+              pkgs.openssl.dev
+              pkgs.git
+
+              pkgs.libuuid
+              pkgs.libuuid.dev
+              pkgs.imagemagick
+            ];
 
             postPatch = ''
               patchShebangs util/xcompile/xcompile
+              patchShebangs util/genbuild_h/genbuild_h.sh
+
+              mkdir -p payloads/external/edk2/workspace
+
+              # cd payloads/external/edk2/workspace
+              # ln -s ../../../../source tianocore
+              # cd ../../../../
+
+              # ln -s ../../../../source payloads/external/edk2/workspace/tianocore
+              # ls -l payloads/external/edk2/workspace/tianocore
+              cp -r ../source payloads/external/edk2/workspace/tianocore
             '';
 
             buildPhase = ''
-              cp ${./config} .config
-
+              cp ${./vp4670/defconfig} ./.config
               make olddefconfig
               make
             '';
