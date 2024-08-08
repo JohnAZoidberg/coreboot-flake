@@ -57,14 +57,16 @@
         in
 
         rec {
-                      gnatWithCxx = pkgs.wrapCC (pkgs.gcc.cc.override {
-    name = "gnat";
-    langC = true;
-    langCC = true;
-    langAda = true;
-    profiledCompiler = false;
-    gnat-bootstrap = pkgs.gnat;
-  });
+          gnatWithCxx = pkgs.wrapCC (
+            pkgs.gcc.cc.override {
+              name = "gnat";
+              langC = true;
+              langCC = true;
+              langAda = true;
+              profiledCompiler = false;
+              gnat-bootstrap = pkgs.gnat;
+            }
+          );
 
           corebootEnv = pkgs.buildFHSUserEnv {
             name = "coreboot-env";
@@ -82,13 +84,25 @@
                 m4
                 bison
                 flex
+                pkg-config
+                ncurses
+                ncurses.dev
+                perl
+                tree
               ];
           };
           corebootToolchain = pkgs.stdenv.mkDerivation {
             pname = "coreboot-toolchain";
             version = coreboot_version;
 
-            src = coreboot_tarball;
+            src =
+              let
+                coreboot_version = "24.05";
+              in
+              pkgs.fetchurl {
+                url = "https://coreboot.org/releases/coreboot-${coreboot_version}.tar.xz";
+                hash = "sha256-4ir9usQAaLpof9l18D9rlYWZoy5w9TnZ0MdNFqY9fOo=";
+              };
 
             # Because the binaries that are build in the chroot reference
             # shared libraries in a way that will not work outside of it, we
@@ -126,10 +140,10 @@
             buildPhase =
               let
                 buildScript = pkgs.writeText "coreboot-toolchain-build" ''
-                  export PATH=/bin:/sbin:/usr/bin:/usr/sbin
-
-                  mkdir -p $out
-                  make VERBOSE=1 crossgcc-i386 CPUS=$(nproc) DEST=$out
+                  # export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+                  # mkdir -p util/crossgcc/build-GMP/
+                  # make VERBOSE=1 crossgcc-i386 CPUS=$(nproc) DEST=$(pwd)/out-prefix
+                  make crossgcc-i386 CPUS=$(nproc) DEST=$(pwd)/out-prefix
                 '';
               in
               ''
@@ -137,10 +151,44 @@
               '';
 
             installPhase = ''
-              echo Already installed.
+              mkdir -p $out
+              cp -r ./out-prefix/* $out/
             '';
           };
-          default = corebootToolchain;
+          # Finally, we can build coreboot itself. It's cross compilation
+          # scripting (xcompile) will find its toolchain in PATH and use it to
+          # build the target binaries. The normal Nix toolchain is used for
+          # host binaries.
+          #
+          # The coreboot build is well-behaved, so there is no need to do it
+          # in a chroot.
+          coreboot = pkgs.stdenv.mkDerivation {
+            pname = "coreboot";
+            version = coreboot_version;
+
+            src = coreboot_tarball;
+
+            nativeBuildInputs = [ corebootToolchain ];
+
+            postPatch = ''
+              patchShebangs util/xcompile/xcompile
+            '';
+
+            buildPhase = ''
+              cp ${./config} .config
+
+              make olddefconfig
+              make
+            '';
+
+            installPhase = ''
+              prefix=$out/share/coreboot
+
+              mkdir -p $prefix
+              install -m 0444 build/coreboot.rom $prefix
+            '';
+          };
+          default = coreboot;
         };
     };
 }
