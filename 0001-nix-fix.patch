@@ -1,0 +1,47 @@
+From e6c21d3d436dc21db06140847573745af3bf93a3 Mon Sep 17 00:00:00 2001
+From: Matei Dibu <contact@mateidibu.dev>
+Date: Wed, 14 Aug 2024 10:24:05 +0300
+Subject: [PATCH] nix fix
+
+---
+ payloads/external/edk2/Makefile | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/payloads/external/edk2/Makefile b/payloads/external/edk2/Makefile
+index 4cb7f0f32b..8746fbebfa 100644
+--- a/payloads/external/edk2/Makefile
++++ b/payloads/external/edk2/Makefile
+@@ -28,6 +28,7 @@ OBJCOPY = $(GCC_PREFIX)objcopy
+ ifeq ($(CONFIG_EDK2_UEFIPAYLOAD),y)
+ BUILD_STR = -p UefiPayloadPkg/UefiPayloadPkg.dsc
+ endif
++BUILD_STR += -v
+ BUILD_STR += -t COREBOOT
+ BUILD_STR += -D BOOTLOADER=COREBOOT
+ ifneq ($(V),1)
+@@ -198,9 +199,12 @@ $(EDK2_PATH): $(WORKSPACE)
+ 		fi; \
+ 		echo "    Fetching new commits from $(CONFIG_EDK2_REPOSITORY)"; \
+ 		git fetch origin 2>/dev/null; \
++		git fetch origin; \
++		echo "tag_or_rev is $(CONFIG_EDK2_TAG_OR_REV)"; \
++		git rev-parse --verify -q $(CONFIG_EDK2_TAG_OR_REV); \
+ 		if ! git rev-parse --verify -q $(CONFIG_EDK2_TAG_OR_REV) >/dev/null; then \
+ 			echo "    $(CONFIG_EDK2_TAG_OR_REV) is not a valid git reference"; \
+-			exit 1; \
++			# exit 1; \
+ 		fi; \
+ 		if git status --ignore-submodules=dirty | grep -q -e clean -e "nothing added"; then \
+ 			echo "    Checking out $(project_name) revision $(CONFIG_EDK2_TAG_OR_REV)"; \
+@@ -278,7 +282,7 @@ $(WORKSPACE)/Build/UefiPayloadPkgX64/$(RELEASE_STR)_COREBOOT/FV/UEFIPAYLOAD.fd:
+ 	cd $(WORKSPACE); \
+ 		source $(EDK2_PATH)/edksetup.sh; \
+ 		echo -n "EDK2: Building... "; \
+-		build -a IA32 -a X64 -b $(RELEASE_STR) $(BUILD_STR) \
++		build -v -a IA32 -a X64 -b $(RELEASE_STR) $(BUILD_STR) \
+ 			-y $(WORKSPACE)/Build/UefiPayloadPkgX64/UEFIPAYLOAD.txt; \
+ 		if [ ! -f $@ ]; then \
+ 			echo "Failed!"; \
+-- 
+2.45.2
+

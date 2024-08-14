@@ -58,12 +58,32 @@
             url = "https://coreboot.org/releases/coreboot-blobs-${coreboot_version}.tar.xz";
             hash = "sha256-0jaBacub79EPmv/pv3Zj5v84uArldyUV8I1LRyUKOoM=";
           };
-          edk2 = pkgs.fetchFromGitHub {
-            owner = "tianocore";
-            repo = "edk2";
-            rev = "tags/edk2-stable202402";
-            hash = "sha256-/betKAMBP+Zy1pKhlS+LIyeMwOFrJEsugxHG8VlCEPQ=";
+          # edk2 = pkgs.fetchFromGitHub {
+          #   owner = "tianocore";
+          #   repo = "edk2";
+          #   # rev = "tags/edk2-stable202402";
+          #   rev = "edc6681206c1a8791981a2f911d2fb8b3d2f5768";
+          #   # hash = "sha256-/betKAMBP+Zy1pKhlS+LIyeMwOFrJEsugxHG8VlCEPQ=";
+          #   hash = "sha256-15kfbxfsfiWsJB5ap3UiGVNfl6CVJFe189HnGt272yU=";
+          #   leaveDotGit = true;
+          #   fetchSubmodules = true;
+          # };
+          edk2 = pkgs.fetchgit {
+            url = "https://github.com/tianocore/edk2";
+            rev = "refs/tags/edk2-stable202402";
+            # rev = "tags/edk2-stable202402";
+            # rev = "edc6681206c1a8791981a2f911d2fb8b3d2f5768";
+            # hash = "sha256-/betKAMBP+Zy1pKhlS+LIyeMwOFrJEsugxHG8VlCEPQ=";
+            hash = "sha256-T099xA2VZIULXVUl8yTFqHpyofBy+Oyye/poHYth27c=";
             leaveDotGit = true;
+            fetchSubmodules = true;
+          };
+          edk2-platforms = pkgs.fetchgit {
+            url = "https://github.com/tianocore/edk2-platforms";
+            rev = "debfeb1f3052ca4d9cc386b9e8aaada5f7da4c60";
+            # rev = "tags/edk2-stable202402";
+            # rev = "edc6681206c1a8791981a2f911d2fb8b3d2f5768";
+            hash = "sha256-ksTDBqoKvod/tmLPmV9Zj0Ed4JPnVerujYF3wG/2MpQ=";
           };
         in
 
@@ -104,6 +124,7 @@
                 tree
               ];
           };
+
           corebootToolchain = pkgs.stdenv.mkDerivation {
             pname = "coreboot-toolchain";
             version = coreboot_version;
@@ -150,9 +171,6 @@
             buildPhase =
               let
                 buildScript = pkgs.writeText "coreboot-toolchain-build" ''
-                  # export PATH=/bin:/sbin:/usr/bin:/usr/sbin
-                  # mkdir -p util/crossgcc/build-GMP/
-                  # make VERBOSE=1 crossgcc-i386 CPUS=$(nproc) DEST=$(pwd)/out-prefix
                   make crossgcc-i386 CPUS=$(nproc) DEST=$(pwd)/out-prefix
                 '';
               in
@@ -165,13 +183,7 @@
               cp -r ./out-prefix/* $out/
             '';
           };
-          # Finally, we can build coreboot itself. It's cross compilation
-          # scripting (xcompile) will find its toolchain in PATH and use it to
-          # build the target binaries. The normal Nix toolchain is used for
-          # host binaries.
-          #
-          # The coreboot build is well-behaved, so there is no need to do it
-          # in a chroot.
+
           coreboot = pkgs.stdenv.mkDerivation {
             pname = "coreboot";
             version = coreboot_version;
@@ -179,49 +191,87 @@
             srcs = [
               coreboot_tarball
               coreboot_blobs_tarball
-              edk2
             ];
-            sourceRoot = "coreboot-${coreboot_version}";
 
             nativeBuildInputs = [
               corebootToolchain
+              pkgs.binutils
               pkgs.pkg-config
               pkgs.nss
               pkgs.python3
               pkgs.openssl.dev
               pkgs.git
-
               pkgs.libuuid
               pkgs.libuuid.dev
               pkgs.imagemagick
+              pkgs.tree
+              gnatWithCxx
+              pkgs.binutils
+              pkgs.gnumake
+              pkgs.coreutils
+              pkgs.patch
+              pkgs.zlib
+              pkgs.zlib.dev
+              pkgs.curl
+              pkgs.git
+              pkgs.m4
+              pkgs.bison
+              pkgs.flex
+              pkgs.pkg-config
+              pkgs.ncurses
+              pkgs.ncurses.dev
+              pkgs.libuuid
+              pkgs.libuuid.dev
+              pkgs.perl
+              pkgs.tree
+              pkgs.cmake
+              pkgs.gnumake
+              corebootEnv
+              pkgs.autoPatchelfHook
+              pkgs.libuuid
+              pkgs.libuuid.dev
+              pkgs.zlib
+              pkgs.libuuid
+              pkgs.libuuid.dev
+              pkgs.flex
+              pkgs.gcc.cc.lib
             ];
+
+            patches = [ ./0001-nix-fix.patch ];
 
             postPatch = ''
               patchShebangs util/xcompile/xcompile
               patchShebangs util/genbuild_h/genbuild_h.sh
-
-              mkdir -p payloads/external/edk2/workspace
-
-              # cd payloads/external/edk2/workspace
-              # ln -s ../../../../source tianocore
-              # cd ../../../../
-
-              # ln -s ../../../../source payloads/external/edk2/workspace/tianocore
-              # ls -l payloads/external/edk2/workspace/tianocore
-              cp -r ../source payloads/external/edk2/workspace/tianocore
             '';
 
-            buildPhase = ''
+            dontConfigure = true;
+
+            configurePhase = ''
+              tr ':' '\n' <<< $PATH
+
               cp ${./vp4670/defconfig} ./.config
               make olddefconfig
-              make
+            '';
+
+            preBuild = ''
+              mkdir vp4670
+              cp ${./vp4670/flashregion_0_flashdescriptor.bin} ./vp4670/flashregion_0_flashdescriptor.bin
+              cp ${./vp4670/flashregion_2_intel_me.bin} ./vp4670/flashregion_2_intel_me.bin
+
+              mkdir -p payloads/external/edk2/workspace
+              cp -r ${edk2} payloads/external/edk2/workspace/tianocore
+              cp -r ${edk2-platforms} payloads/external/edk2/workspace/edk2-platforms
+              chmod -R +r payloads/external/edk2/workspace/
+              chmod -R +w payloads/external/edk2/workspace/
+              chmod -R +x payloads/external/edk2/workspace/
+
+              patchShebangs payloads/external/edk2/workspace/tianocore/BaseTools/BinWrappers/PosixLike/TianoCompress
+              patchShebangs payloads/external/edk2/workspace/tianocore/BaseTools/BinWrappers/PosixLike/build
             '';
 
             installPhase = ''
-              prefix=$out/share/coreboot
-
-              mkdir -p $prefix
-              install -m 0444 build/coreboot.rom $prefix
+              mkdir -p $out
+              install -m 0444 build/coreboot.rom $out
             '';
           };
           default = coreboot;
