@@ -1,7 +1,5 @@
 {
-  inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-  };
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
   outputs =
     { self, ... }@inputs:
@@ -58,31 +56,16 @@
             url = "https://coreboot.org/releases/coreboot-blobs-${coreboot_version}.tar.xz";
             hash = "sha256-0jaBacub79EPmv/pv3Zj5v84uArldyUV8I1LRyUKOoM=";
           };
-          # edk2 = pkgs.fetchFromGitHub {
-          #   owner = "tianocore";
-          #   repo = "edk2";
-          #   # rev = "tags/edk2-stable202402";
-          #   rev = "edc6681206c1a8791981a2f911d2fb8b3d2f5768";
-          #   # hash = "sha256-/betKAMBP+Zy1pKhlS+LIyeMwOFrJEsugxHG8VlCEPQ=";
-          #   hash = "sha256-15kfbxfsfiWsJB5ap3UiGVNfl6CVJFe189HnGt272yU=";
-          #   leaveDotGit = true;
-          #   fetchSubmodules = true;
-          # };
           edk2 = pkgs.fetchgit {
             url = "https://github.com/tianocore/edk2";
             rev = "refs/tags/edk2-stable202402";
-            # rev = "tags/edk2-stable202402";
-            # rev = "edc6681206c1a8791981a2f911d2fb8b3d2f5768";
-            # hash = "sha256-/betKAMBP+Zy1pKhlS+LIyeMwOFrJEsugxHG8VlCEPQ=";
-            hash = "sha256-T099xA2VZIULXVUl8yTFqHpyofBy+Oyye/poHYth27c=";
+            hash = "sha256-2iNCs1WhYy7MBTmEezozoC2lFg7FPvQe9eZ08HadP2E=";
             leaveDotGit = true;
             fetchSubmodules = true;
           };
           edk2-platforms = pkgs.fetchgit {
             url = "https://github.com/tianocore/edk2-platforms";
             rev = "debfeb1f3052ca4d9cc386b9e8aaada5f7da4c60";
-            # rev = "tags/edk2-stable202402";
-            # rev = "edc6681206c1a8791981a2f911d2fb8b3d2f5768";
             hash = "sha256-ksTDBqoKvod/tmLPmV9Zj0Ed4JPnVerujYF3wG/2MpQ=";
           };
         in
@@ -103,7 +86,8 @@
             name = "coreboot-env";
             targetPkgs =
               pkgs: with pkgs; [
-                gnatWithCxx
+                # gnatWithCxx
+                gnat
                 binutils
                 gnumake
                 coreutils
@@ -131,47 +115,37 @@
 
             src = coreboot_tarball;
 
-            # Because the binaries that are build in the chroot reference
-            # shared libraries in a way that will not work outside of it, we
-            # need to patch the resulting ELFs.
-            #
-            # This is conceptually similar to how externally-built binary
-            # packages, such as Steam or MS Teams, are built. autoPatchelfHook
-            # is taking care of the heavy lifting here.
-            #
-            # There is small wrinkle here: autoPatchelfHook assumes it has a
-            # working compilation environment with binutils. That's why we use
-            # `mkDerivation` instead of `mkDerivationNoCC` for the toolchain
-            # derivation.
             nativeBuildInputs = [
               corebootEnv
               pkgs.autoPatchelfHook
-              pkgs.libuuid
               pkgs.libuuid.dev
             ];
+
             buildInputs = [
               pkgs.zlib
               pkgs.libuuid
-              pkgs.libuuid.dev
               pkgs.flex
               pkgs.gcc.cc.lib
             ];
 
-            postPatch = ''
+            prePatch = ''
               mkdir -p util/crossgcc/tarballs
-              ln -s ${gmp_tarball} util/crossgcc/tarballs/${gmp_filename}
-              ln -s ${mpfr_tarball} util/crossgcc/tarballs/${mpfr_filename}
-              ln -s ${mpc_tarball} util/crossgcc/tarballs/${mpc_filename}
+              ln -s ${gmp_tarball}      util/crossgcc/tarballs/${gmp_filename}
+              ln -s ${mpfr_tarball}     util/crossgcc/tarballs/${mpfr_filename}
+              ln -s ${mpc_tarball}      util/crossgcc/tarballs/${mpc_filename}
               ln -s ${binutils_tarball} util/crossgcc/tarballs/${binutils_filename}
-              ln -s ${gcc_tarball} util/crossgcc/tarballs/${gcc_filename}
-              ln -s ${nasm_tarball} util/crossgcc/tarballs/${nasm_filename}
-              ln -s ${acpica_tarball} util/crossgcc/tarballs/${acpica_filename}
+              ln -s ${gcc_tarball}      util/crossgcc/tarballs/${gcc_filename}
+              ln -s ${nasm_tarball}     util/crossgcc/tarballs/${nasm_filename}
+              ln -s ${acpica_tarball}   util/crossgcc/tarballs/${acpica_filename}
             '';
 
             buildPhase =
               let
-                buildScript = pkgs.writeText "coreboot-toolchain-build" ''
-                  make crossgcc-i386 CPUS=$(nproc) DEST=$(pwd)/out-prefix
+                buildScript = pkgs.writeShellScript "coreboot-toolchain-build" ''
+                  make \
+                      crossgcc-i386 \
+                      CPUS=$(nproc) \
+                      DEST=$(pwd)/out-prefix
                 '';
               in
               ''
@@ -204,38 +178,10 @@
               pkgs.libuuid
               pkgs.libuuid.dev
               pkgs.imagemagick
-              pkgs.tree
-              gnatWithCxx
-              pkgs.binutils
-              pkgs.gnumake
-              pkgs.coreutils
-              pkgs.patch
-              pkgs.zlib
-              pkgs.zlib.dev
-              pkgs.curl
-              pkgs.git
-              pkgs.m4
-              pkgs.bison
-              pkgs.flex
-              pkgs.pkg-config
-              pkgs.ncurses
-              pkgs.ncurses.dev
-              pkgs.libuuid
-              pkgs.libuuid.dev
-              pkgs.perl
-              pkgs.tree
               pkgs.cmake
-              pkgs.gnumake
-              corebootEnv
-              pkgs.autoPatchelfHook
-              pkgs.libuuid
-              pkgs.libuuid.dev
-              pkgs.zlib
-              pkgs.libuuid
-              pkgs.libuuid.dev
-              pkgs.flex
-              pkgs.gcc.cc.lib
             ];
+
+            enableParallelBuilding = true;
 
             patches = [ ./0001-nix-fix.patch ];
 
@@ -244,26 +190,19 @@
               patchShebangs util/genbuild_h/genbuild_h.sh
             '';
 
-            dontConfigure = true;
-
             configurePhase = ''
-              tr ':' '\n' <<< $PATH
-
               cp ${./vp4670/defconfig} ./.config
               make olddefconfig
             '';
 
             preBuild = ''
-              mkdir vp4670
-              cp ${./vp4670/flashregion_0_flashdescriptor.bin} ./vp4670/flashregion_0_flashdescriptor.bin
-              cp ${./vp4670/flashregion_2_intel_me.bin} ./vp4670/flashregion_2_intel_me.bin
+              cp -r ${./vp4670} ./vp4670
 
-              mkdir -p payloads/external/edk2/workspace
-              cp -r ${edk2} payloads/external/edk2/workspace/tianocore
+              mkdir -p                payloads/external/edk2/workspace
+              cp -r ${edk2}           payloads/external/edk2/workspace/tianocore
               cp -r ${edk2-platforms} payloads/external/edk2/workspace/edk2-platforms
-              chmod -R +r payloads/external/edk2/workspace/
-              chmod -R +w payloads/external/edk2/workspace/
-              chmod -R +x payloads/external/edk2/workspace/
+
+              chmod -R +w payloads/external/edk2/workspace/tianocore/
 
               patchShebangs payloads/external/edk2/workspace/tianocore/BaseTools/BinWrappers/PosixLike/TianoCompress
               patchShebangs payloads/external/edk2/workspace/tianocore/BaseTools/BinWrappers/PosixLike/build
@@ -274,6 +213,7 @@
               install -m 0444 build/coreboot.rom $out
             '';
           };
+
           default = coreboot;
         };
     };
