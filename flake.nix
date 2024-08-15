@@ -57,23 +57,30 @@
             hash = "sha256-0jaBacub79EPmv/pv3Zj5v84uArldyUV8I1LRyUKOoM=";
           };
           # edk2 = pkgs.fetchgit {
-          #   url = "https://github.com/MrChromebox/edk2";
-          #   rev = "5628160f9a5a89ce741d26092fea4cf585114db5";
-          #   hash = "sha256-gxriadqZIeWXOAigYHRFSscV/IJWloGaG1zUswwWggk=";
-          #   leaveDotGit = true;
-          #   fetchSubmodules = true;
-          # };
-          # edk2 = pkgs.fetchgit {
           #   url = "https://github.com/tianocore/edk2";
           #   rev = "refs/tags/edk2-stable202405";
           #   hash = "sha256-UvoTMBUSYjs7blNeRUEoheTdmpMyu2n3W6QAEdy6GQc=";
           #   leaveDotGit = true;
           #   fetchSubmodules = true;
           # };
-          edk2 = pkgs.fetchgit {
+          edk2-MrChromebox = pkgs.fetchgit {
+            url = "https://github.com/MrChromebox/edk2";
+            rev = "b984bd77f3dc523394bb3bbc834d421e2761dfe0";
+                        hash = "sha256-ewCMOKuahTa4qGTuXhlfBm2P3snYe9iEQngAGwMQ2VI=";
+            leaveDotGit = true;
+            fetchSubmodules = true;
+          };
+          edk2-tianocore-202308 = pkgs.fetchgit {
             url = "https://github.com/tianocore/edk2";
-            rev = "refs/tags/edk2-stable202402";
-            hash = "sha256-4cWql27U1Fsp1Q5MHFq+rnULHyn1g/BTMDREM23k/Xg=";
+            rev = "refs/tags/edk2-stable202308";
+            hash = "sha256-k2synazhln95a3YBqB3Gtfx3y6ThCtvNuF8wvaTS1Mo=";
+            leaveDotGit = true;
+            fetchSubmodules = true;
+          };
+          edk2-tianocore-202311 = pkgs.fetchgit {
+            url = "https://github.com/tianocore/edk2";
+            rev = "refs/tags/edk2-stable202311";
+            hash = "sha256-znC3+Bur2y1yYR23kvgD47X5UIhfDX+E57lgMncouVU=";
             leaveDotGit = true;
             fetchSubmodules = true;
           };
@@ -182,7 +189,7 @@
             ];
 
             nativeBuildInputs = [
-              corebootToolchain
+              pkgs.coreboot-toolchain.i386
               pkgs.binutils
               pkgs.pkg-config
               pkgs.nss
@@ -214,13 +221,18 @@
               cp -r ${./vp4670} ./vp4670
 
               mkdir -p                payloads/external/edk2/workspace
-              cp -r ${edk2}           payloads/external/edk2/workspace/tianocore
+
               cp -r ${edk2-platforms} payloads/external/edk2/workspace/edk2-platforms
 
-              chmod -R +w payloads/external/edk2/workspace/tianocore/
-
+              cp -r ${edk2-tianocore-202308} payloads/external/edk2/workspace/tianocore
+              chmod -R +w   payloads/external/edk2/workspace/tianocore/
               patchShebangs payloads/external/edk2/workspace/tianocore/BaseTools/BinWrappers/PosixLike/TianoCompress
               patchShebangs payloads/external/edk2/workspace/tianocore/BaseTools/BinWrappers/PosixLike/build
+
+              cp -r ${edk2-MrChromebox} payloads/external/edk2/workspace/mrchromebox
+              chmod -R +w   payloads/external/edk2/workspace/mrchromebox/
+              patchShebangs payloads/external/edk2/workspace/mrchromebox/BaseTools/BinWrappers/PosixLike/TianoCompress
+              patchShebangs payloads/external/edk2/workspace/mrchromebox/BaseTools/BinWrappers/PosixLike/build
             '';
 
             installPhase = ''

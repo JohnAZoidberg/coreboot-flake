@@ -1,32 +1,81 @@
-From 9c2b3cf71830aee173d13f23b9bc33f5438eb2eb Mon Sep 17 00:00:00 2001
+From 1ec19fafdec1467f36a96a6f4bfa5855c4806f7f Mon Sep 17 00:00:00 2001
 From: Matei Dibu <contact@mateidibu.dev>
 Date: Thu, 15 Aug 2024 12:27:53 +0300
 Subject: [PATCH] nix fix
 
 ---
- payloads/external/edk2/Makefile | 2 --
- 1 file changed, 2 deletions(-)
+ payloads/external/GRUB2/Makefile | 10 ----------
+ payloads/external/edk2/Makefile  | 31 -------------------------------
+ 2 files changed, 41 deletions(-)
 
+diff --git a/payloads/external/GRUB2/Makefile b/payloads/external/GRUB2/Makefile
+index 4382ae60fa..d25d2071b3 100644
+--- a/payloads/external/GRUB2/Makefile
++++ b/payloads/external/GRUB2/Makefile
+@@ -15,16 +15,6 @@ all: grub2
+ 
+ checkout:
+ 	echo "    GIT        GRUB2 $(NAME-y)"
+-	test -d $(project_dir) || git clone $(project_git_repo) $(project_dir)
+-	git -C $(project_dir) fetch
+-ifeq ($(shell test -d $(project_dir) && \
+-       (git -C $(project_dir) status --ignored=no --untracked-files=no --porcelain)),)
+-	git -C $(project_dir) checkout -f $(TAG-y)
+-else
+-	echo "WARNING: index/tree not clean, skipping update / force checkout."
+-	echo "         Checkout manually with "\
+-	     "\`git -C payloads/external/GRUB2/$(project_dir) checkout -f\`."
+-endif
+ 
+ grub2/build/config.h: $(CONFIG_DEP) | checkout
+ 	echo "    CONFIG     GRUB2 $(NAME-y)"
 diff --git a/payloads/external/edk2/Makefile b/payloads/external/edk2/Makefile
-index 4cb7f0f32b..816afef6e2 100644
+index 4cb7f0f32b..6a169c32ac 100644
 --- a/payloads/external/edk2/Makefile
 +++ b/payloads/external/edk2/Makefile
-@@ -177,7 +177,6 @@ $(EDK2_PLATFORMS_PATH): $(WORKSPACE)
- 	cd $(EDK2_PLATFORMS_PATH); \
- 		if ! git rev-parse --verify -q $(CONFIG_EDK2_PLATFORMS_TAG_OR_REV) >/dev/null; then \
- 			echo "    $(CONFIG_EDK2_PLATFORMS_TAG_OR_REV) is not a valid git reference"; \
+@@ -174,42 +174,11 @@ $(EDK2_PLATFORMS_PATH): $(WORKSPACE)
+ 	if [ ! -d "$(EDK2_PLATFORMS_PATH)" ]; then \
+ 		git clone --recurse-submodules $(CONFIG_EDK2_PLATFORMS_REPOSITORY) $(EDK2_PLATFORMS_PATH) -j5; \
+ 	fi
+-	cd $(EDK2_PLATFORMS_PATH); \
+-		if ! git rev-parse --verify -q $(CONFIG_EDK2_PLATFORMS_TAG_OR_REV) >/dev/null; then \
+-			echo "    $(CONFIG_EDK2_PLATFORMS_TAG_OR_REV) is not a valid git reference"; \
 -			exit 1; \
- 		fi; \
- 		if git status --ignore-submodules=dirty | grep -q "nothing to commit, working tree clean"; then \
- 			echo "    Checking out edk2-platforms revision $(CONFIG_EDK2_PLATFORMS_TAG_OR_REV)"; \
-@@ -200,7 +199,6 @@ $(EDK2_PATH): $(WORKSPACE)
- 		git fetch origin 2>/dev/null; \
- 		if ! git rev-parse --verify -q $(CONFIG_EDK2_TAG_OR_REV) >/dev/null; then \
- 			echo "    $(CONFIG_EDK2_TAG_OR_REV) is not a valid git reference"; \
+-		fi; \
+-		if git status --ignore-submodules=dirty | grep -q "nothing to commit, working tree clean"; then \
+-			echo "    Checking out edk2-platforms revision $(CONFIG_EDK2_PLATFORMS_TAG_OR_REV)"; \
+-			git checkout --detach $(CONFIG_EDK2_PLATFORMS_TAG_OR_REV) -f; \
+-		else \
+-			echo "    Working directory not clean; will not overwrite"; \
+-		fi; \
+-		git submodule update --init --checkout
+ 
+ $(EDK2_PATH): $(WORKSPACE)
+ 	if [ ! -d "$(EDK2_PATH)" ]; then \
+ 		git clone --recurse-submodules $(CONFIG_EDK2_REPOSITORY) $(EDK2_PATH) -j5; \
+ 	fi
+-	cd $(EDK2_PATH); \
+-		git checkout MdeModulePkg/Logo/Logo.bmp > /dev/null 2>&1 || true; \
+-		if [ -e UefiPayloadPkg/ShimLayer/UniversalPayload.o ]; then \
+-			rm UefiPayloadPkg/ShimLayer/UniversalPayload.o; \
+-		fi; \
+-		echo "    Fetching new commits from $(CONFIG_EDK2_REPOSITORY)"; \
+-		git fetch origin 2>/dev/null; \
+-		if ! git rev-parse --verify -q $(CONFIG_EDK2_TAG_OR_REV) >/dev/null; then \
+-			echo "    $(CONFIG_EDK2_TAG_OR_REV) is not a valid git reference"; \
 -			exit 1; \
- 		fi; \
- 		if git status --ignore-submodules=dirty | grep -q -e clean -e "nothing added"; then \
- 			echo "    Checking out $(project_name) revision $(CONFIG_EDK2_TAG_OR_REV)"; \
+-		fi; \
+-		if git status --ignore-submodules=dirty | grep -q -e clean -e "nothing added"; then \
+-			echo "    Checking out $(project_name) revision $(CONFIG_EDK2_TAG_OR_REV)"; \
+-			git checkout --detach $(CONFIG_EDK2_TAG_OR_REV) -f; \
+-			git submodule update --checkout --recursive; \
+-		else \
+-			echo "    Working directory not clean; will not overwrite"; \
+-		fi; \
+-		git submodule update --init --checkout
+ 
+ logo: $(EDK2_PATH)
+ 	case "$(CONFIG_EDK2_BOOTSPLASH_FILE)" in \
 -- 
 2.45.2
 
