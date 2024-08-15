@@ -11,17 +11,31 @@
       packages."x86_64-linux" =
         let
           coreboot_version = "24.05";
-          tianocore_tag = "edk2-stable202308";
-          mrchromebox_tag = "uefipayload_202304";
+          tianocore_tag = "edk2-stable202402";
+          mrchromebox_branch = "uefipayload_202304";
 
           coreboot_tarball = pkgs.fetchurl {
             url = "https://coreboot.org/releases/coreboot-${coreboot_version}.tar.xz";
-            hash = "sha256-4ir9usQAaLpof9l18D9rlYWZoy5w9TnZ0MdNFqY9fOo=";
+            hash =
+              {
+                "24.02" = "sha256-dBZYK2b/NZq/Y9qb5cTRmeQoBQZukZfe8vDDjcfEcq4=";
+                "24.02.01" = "sha256-5W9cDJAIv97BxL5kCawJNoAUD5RB79PV5Hve/8v3flA=";
+                "24.05" = "sha256-4ir9usQAaLpof9l18D9rlYWZoy5w9TnZ0MdNFqY9fOo=";
+              }
+              .${coreboot_version};
           };
+
           coreboot_blobs_tarball = pkgs.fetchurl {
             url = "https://coreboot.org/releases/coreboot-blobs-${coreboot_version}.tar.xz";
-            hash = "sha256-0jaBacub79EPmv/pv3Zj5v84uArldyUV8I1LRyUKOoM=";
+            hash =
+              {
+                "24.02" = "sha256-Uck3a74vnSlDlgfVUjkipuKAH7d8Z69GmQCfks/+3/0=";
+                "24.02.01" = "sha256-jQO4LNKyWTRz1M1RHHvvf91Dg5I39sN6g4MWFmDBRCc=";
+                "24.05" = "sha256-0jaBacub79EPmv/pv3Zj5v84uArldyUV8I1LRyUKOoM=";
+              }
+              .${coreboot_version};
           };
+
           edk2-MrChromebox = pkgs.fetchgit (
             {
               url = "https://github.com/MrChromebox/edk2";
@@ -53,11 +67,13 @@
                 hash = "sha256-4sjEA96K9Fu8tdSCIHlCIZY05LwdJZyS7JzAyXO9fYI=";
               };
             }
-            .${mrchromebox_tag}
+            .${mrchromebox_branch}
           );
+
           edk2-tianocore = pkgs.fetchgit {
             url = "https://github.com/tianocore/edk2";
             rev = "refs/tags/${tianocore_tag}";
+            fetchSubmodules = true;
             hash =
               {
                 "edk2-stable202305" = "";
@@ -67,8 +83,8 @@
                 "edk2-stable202405" = "sha256-UvoTMBUSYjs7blNeRUEoheTdmpMyu2n3W6QAEdy6GQc=";
               }
               .${tianocore_tag};
-            fetchSubmodules = true;
           };
+
           edk2-platforms = pkgs.fetchgit {
             url = "https://github.com/tianocore/edk2-platforms";
             rev = "debfeb1f3052ca4d9cc386b9e8aaada5f7da4c60";
