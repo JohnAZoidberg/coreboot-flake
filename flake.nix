@@ -10,44 +10,10 @@
       formatter."x86_64-linux" = pkgs.nixfmt-rfc-style;
       packages."x86_64-linux" =
         let
-          gmp_filename = "gmp-6.3.0.tar.xz";
-          gmp_tarball = pkgs.fetchurl {
-            url = "https://ftpmirror.gnu.org/gmp/${gmp_filename}";
-            hash = "sha256-o8K4AgG4nmhhb0rTC8Zq7kknw85Q4zkpyoGdXENTiJg=";
-          };
-          mpfr_filename = "mpfr-4.2.1.tar.xz";
-          mpfr_tarball = pkgs.fetchurl {
-            url = "https://ftpmirror.gnu.org/mpfr/${mpfr_filename}";
-            hash = "sha256-J3gHNTpnJpeJlpRa8T5Sgp46vXqaW3+yeTiU4Y8fy7I=";
-          };
-          mpc_filename = "mpc-1.3.1.tar.gz";
-          mpc_tarball = pkgs.fetchurl {
-            url = "https://ftpmirror.gnu.org/mpc/${mpc_filename}";
-            hash = "sha256-q2QkkvXPiCt0qgy3MM1BCoHtzb7IlRg86TDnBsHHWbg=";
-          };
-          binutils_filename = "binutils-2.42.tar.xz";
-          binutils_tarball = pkgs.fetchurl {
-            url = "https://ftpmirror.gnu.org/binutils/${binutils_filename}";
-            hash = "sha256-9uTUH9X8d4sGt4kUV7NiDaXs6hAGxqSkGumYEJ+FqAA=";
-          };
-          gcc_version = "13.2.0";
-          gcc_filename = "gcc-${gcc_version}.tar.xz";
-          gcc_tarball = pkgs.fetchurl {
-            url = "https://ftpmirror.gnu.org/gcc/gcc-${gcc_version}/${gcc_filename}";
-            hash = "sha256-4nXnZEKmBnNBon8Exca4PYYTFEAEwEE1KIY9xrXHQ9o=";
-          };
-          nasm_version = "2.16.01";
-          nasm_filename = "nasm-${nasm_version}.tar.bz2";
-          nasm_tarball = pkgs.fetchurl {
-            url = "https://www.nasm.us/pub/nasm/releasebuilds/${nasm_version}/${nasm_filename}";
-            hash = "sha256-NbatLuBI1BxHefBz8+/Kd2KoIrfS1O9OjfJM9ldHuy4=";
-          };
-          acpica_filename = "acpica-unix-20230628.tar.gz";
-          acpica_tarball = pkgs.fetchurl {
-            url = "https://downloadmirror.intel.com/783534/${acpica_filename}";
-            hash = "sha256-hodqdF49Ik3P0iLtPeRltHVZ6FgR3y25gg7wmp3/XM4=";
-          };
           coreboot_version = "24.05";
+          tianocore_tag = "edk2-stable202308";
+          mrchromebox_tag = "uefipayload_202304";
+
           coreboot_tarball = pkgs.fetchurl {
             url = "https://coreboot.org/releases/coreboot-${coreboot_version}.tar.xz";
             hash = "sha256-4ir9usQAaLpof9l18D9rlYWZoy5w9TnZ0MdNFqY9fOo=";
@@ -56,32 +22,51 @@
             url = "https://coreboot.org/releases/coreboot-blobs-${coreboot_version}.tar.xz";
             hash = "sha256-0jaBacub79EPmv/pv3Zj5v84uArldyUV8I1LRyUKOoM=";
           };
-          # edk2 = pkgs.fetchgit {
-          #   url = "https://github.com/tianocore/edk2";
-          #   rev = "refs/tags/edk2-stable202405";
-          #   hash = "sha256-UvoTMBUSYjs7blNeRUEoheTdmpMyu2n3W6QAEdy6GQc=";
-          #   leaveDotGit = true;
-          #   fetchSubmodules = true;
-          # };
-          edk2-MrChromebox = pkgs.fetchgit {
-            url = "https://github.com/MrChromebox/edk2";
-            rev = "b984bd77f3dc523394bb3bbc834d421e2761dfe0";
-                        hash = "sha256-ewCMOKuahTa4qGTuXhlfBm2P3snYe9iEQngAGwMQ2VI=";
-            leaveDotGit = true;
-            fetchSubmodules = true;
-          };
-          edk2-tianocore-202308 = pkgs.fetchgit {
+          edk2-MrChromebox = pkgs.fetchgit (
+            {
+              url = "https://github.com/MrChromebox/edk2";
+              fetchSubmodules = true;
+            }
+            // {
+              "uefipayload_202304" = {
+                rev = "cbf33b54e18c5e48d1b4030f0b7e307f56d65a76";
+                hash = "sha256-fsrhlF8Bdak8kVJjCcbA2PgJOsxdTvaXu/xp391pgr0=";
+              };
+              "uefipayload_202306" = {
+                rev = "92533b23fb93259b20661b6534109e9f59384e93";
+                hash = "sha256-R+SDEDgF81utfLqk28SmLepWDmuwUjyY3gLLLhT7LBM=";
+              };
+              "uefipayload_202309" = {
+                rev = "b984bd77f3dc523394bb3bbc834d421e2761dfee";
+                hash = "sha256-ewCMOKuahTa4qGTuXhlfBm2P3snYe9iEQngAGwMQ2VI=";
+              };
+              "uefipayload_2402" = {
+                rev = "7f398d3b14928ffecbbe92bd93213db91dad7703";
+                hash = "sha256-USAhJ0Y9TU6cFlrKL9pjH5sVujsNNHb4lmDQ5ekQEsg=";
+              };
+              "uefipayload_2405" = {
+                rev = "b984bd77f3dc523394bb3bbc834d421e2761dfef";
+                hash = "sha256-rTaCD1QUq7XmHu0qFtErlDZg4csFzqdfjv2e0gOBgA4=";
+              };
+              "uefipayload_2408" = {
+                rev = "78c2b10586e58b23920ec0f4d3cc1cf5fdd0b979";
+                hash = "sha256-4sjEA96K9Fu8tdSCIHlCIZY05LwdJZyS7JzAyXO9fYI=";
+              };
+            }
+            .${mrchromebox_tag}
+          );
+          edk2-tianocore = pkgs.fetchgit {
             url = "https://github.com/tianocore/edk2";
-            rev = "refs/tags/edk2-stable202308";
-            hash = "sha256-k2synazhln95a3YBqB3Gtfx3y6ThCtvNuF8wvaTS1Mo=";
-            leaveDotGit = true;
-            fetchSubmodules = true;
-          };
-          edk2-tianocore-202311 = pkgs.fetchgit {
-            url = "https://github.com/tianocore/edk2";
-            rev = "refs/tags/edk2-stable202311";
-            hash = "sha256-znC3+Bur2y1yYR23kvgD47X5UIhfDX+E57lgMncouVU=";
-            leaveDotGit = true;
+            rev = "refs/tags/${tianocore_tag}";
+            hash =
+              {
+                "edk2-stable202305" = "";
+                "edk2-stable202308" = "";
+                "edk2-stable202311" = "sha256-k2synazhln95a3YBqB3Gtfx3y6ThCtvNuF8wvaTS1Mo=";
+                "edk2-stable202402" = "";
+                "edk2-stable202405" = "sha256-UvoTMBUSYjs7blNeRUEoheTdmpMyu2n3W6QAEdy6GQc=";
+              }
+              .${tianocore_tag};
             fetchSubmodules = true;
           };
           edk2-platforms = pkgs.fetchgit {
@@ -90,97 +75,9 @@
             hash = "sha256-ksTDBqoKvod/tmLPmV9Zj0Ed4JPnVerujYF3wG/2MpQ=";
           };
         in
-
-        rec {
-          gnatWithCxx = pkgs.wrapCC (
-            pkgs.gcc.cc.override {
-              name = "gnat";
-              langC = true;
-              langCC = true;
-              langAda = true;
-              profiledCompiler = false;
-              gnat-bootstrap = pkgs.gnat;
-            }
-          );
-
-          corebootEnv = pkgs.buildFHSUserEnv {
-            name = "coreboot-env";
-            targetPkgs =
-              pkgs: with pkgs; [
-                # gnatWithCxx
-                gnat
-                binutils
-                gnumake
-                coreutils
-                patch
-                zlib
-                zlib.dev
-                curl
-                git
-                m4
-                bison
-                flex
-                pkg-config
-                ncurses
-                ncurses.dev
-                libuuid
-                libuuid.dev
-                perl
-                tree
-              ];
-          };
-
-          corebootToolchain = pkgs.stdenv.mkDerivation {
-            pname = "coreboot-toolchain";
-            version = coreboot_version;
-
-            src = coreboot_tarball;
-
-            nativeBuildInputs = [
-              corebootEnv
-              pkgs.autoPatchelfHook
-              pkgs.libuuid.dev
-            ];
-
-            buildInputs = [
-              pkgs.zlib
-              pkgs.libuuid
-              pkgs.flex
-              pkgs.gcc.cc.lib
-            ];
-
-            prePatch = ''
-              mkdir -p util/crossgcc/tarballs
-              ln -s ${gmp_tarball}      util/crossgcc/tarballs/${gmp_filename}
-              ln -s ${mpfr_tarball}     util/crossgcc/tarballs/${mpfr_filename}
-              ln -s ${mpc_tarball}      util/crossgcc/tarballs/${mpc_filename}
-              ln -s ${binutils_tarball} util/crossgcc/tarballs/${binutils_filename}
-              ln -s ${gcc_tarball}      util/crossgcc/tarballs/${gcc_filename}
-              ln -s ${nasm_tarball}     util/crossgcc/tarballs/${nasm_filename}
-              ln -s ${acpica_tarball}   util/crossgcc/tarballs/${acpica_filename}
-            '';
-
-            buildPhase =
-              let
-                buildScript = pkgs.writeShellScript "coreboot-toolchain-build" ''
-                  make \
-                      crossgcc-i386 \
-                      CPUS=$(nproc) \
-                      DEST=$(pwd)/out-prefix
-                '';
-              in
-              ''
-                coreboot-env ${buildScript}
-              '';
-
-            installPhase = ''
-              mkdir -p $out
-              cp -r ./out-prefix/* $out/
-            '';
-          };
-
-          coreboot = pkgs.stdenv.mkDerivation {
-            pname = "coreboot";
+        {
+          coreboot-vp4670 = pkgs.stdenv.mkDerivation {
+            pname = "coreboot-vp4670";
             version = coreboot_version;
 
             srcs = [
@@ -203,7 +100,18 @@
               pkgs.ncurses.dev
             ];
 
-            enableParallelBuilding = true;
+            env = {
+              BUILD_TIMELESS = 1;
+
+              # coreboot source describes this as "misleadingly named, this is
+              # the coreboot version".  We set this to $out, so that you can
+              # always find the outpath a machine's current bootflash image by
+              # simply reading the image back (`flashrom -r`) and running
+              # `strings | grep /nix/store` on the result.
+              KERNELVERSION = builtins.placeholder "out";
+            };
+
+            # enableParallelBuilding = true;
 
             patches = [ ./0001-nix-fix.patch ];
 
@@ -220,11 +128,11 @@
             preBuild = ''
               cp -r ${./vp4670} ./vp4670
 
-              mkdir -p                payloads/external/edk2/workspace
+              mkdir -p payloads/external/edk2/workspace
 
               cp -r ${edk2-platforms} payloads/external/edk2/workspace/edk2-platforms
 
-              cp -r ${edk2-tianocore-202308} payloads/external/edk2/workspace/tianocore
+              cp -r ${edk2-tianocore} payloads/external/edk2/workspace/tianocore
               chmod -R +w   payloads/external/edk2/workspace/tianocore/
               patchShebangs payloads/external/edk2/workspace/tianocore/BaseTools/BinWrappers/PosixLike/TianoCompress
               patchShebangs payloads/external/edk2/workspace/tianocore/BaseTools/BinWrappers/PosixLike/build
@@ -240,8 +148,6 @@
               install -m 0444 build/coreboot.rom $out
             '';
           };
-
-          default = coreboot;
         };
     };
 }
