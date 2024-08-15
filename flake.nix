@@ -61,7 +61,7 @@
             hash =
               {
                 "edk2-stable202305" = "";
-                "edk2-stable202308" = "";
+                "edk2-stable202308" = "sha256-Eoi1xf/hw/Knr7n0f0rgVof7wTgrHkmvV4eJjJV1NhM=";
                 "edk2-stable202311" = "sha256-k2synazhln95a3YBqB3Gtfx3y6ThCtvNuF8wvaTS1Mo=";
                 "edk2-stable202402" = "";
                 "edk2-stable202405" = "sha256-UvoTMBUSYjs7blNeRUEoheTdmpMyu2n3W6QAEdy6GQc=";
