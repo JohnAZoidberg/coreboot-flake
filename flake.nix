@@ -56,10 +56,24 @@
             url = "https://coreboot.org/releases/coreboot-blobs-${coreboot_version}.tar.xz";
             hash = "sha256-0jaBacub79EPmv/pv3Zj5v84uArldyUV8I1LRyUKOoM=";
           };
+          # edk2 = pkgs.fetchgit {
+          #   url = "https://github.com/MrChromebox/edk2";
+          #   rev = "5628160f9a5a89ce741d26092fea4cf585114db5";
+          #   hash = "sha256-gxriadqZIeWXOAigYHRFSscV/IJWloGaG1zUswwWggk=";
+          #   leaveDotGit = true;
+          #   fetchSubmodules = true;
+          # };
+          # edk2 = pkgs.fetchgit {
+          #   url = "https://github.com/tianocore/edk2";
+          #   rev = "refs/tags/edk2-stable202405";
+          #   hash = "sha256-UvoTMBUSYjs7blNeRUEoheTdmpMyu2n3W6QAEdy6GQc=";
+          #   leaveDotGit = true;
+          #   fetchSubmodules = true;
+          # };
           edk2 = pkgs.fetchgit {
             url = "https://github.com/tianocore/edk2";
             rev = "refs/tags/edk2-stable202402";
-            hash = "sha256-2iNCs1WhYy7MBTmEezozoC2lFg7FPvQe9eZ08HadP2E=";
+            hash = "sha256-4cWql27U1Fsp1Q5MHFq+rnULHyn1g/BTMDREM23k/Xg=";
             leaveDotGit = true;
             fetchSubmodules = true;
           };
