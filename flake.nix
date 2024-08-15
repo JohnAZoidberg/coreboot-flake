@@ -179,6 +179,7 @@
               pkgs.libuuid.dev
               pkgs.imagemagick
               pkgs.cmake
+              pkgs.ncurses.dev
             ];
 
             enableParallelBuilding = true;
