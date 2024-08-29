@@ -63,6 +63,8 @@
               pkgs.coreboot-toolchain.i386
               pkgs.python3
               pkgs.imagemagick
+              pkgs.nss
+              pkgs.pkg-config
             ];
 
             strictDeps = true;
