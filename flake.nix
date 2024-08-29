@@ -11,7 +11,6 @@
       packages."x86_64-linux" =
         let
           coreboot_version = "24.05";
-          tianocore_tag = "edk2-stable202408";
 
           coreboot_tarball = pkgs.fetchurl {
             url = "https://coreboot.org/releases/coreboot-${coreboot_version}.tar.xz";
@@ -33,22 +32,19 @@
               .${coreboot_version};
           };
 
-          edk2-tianocore = pkgs.fetchgit {
-            url = "https://github.com/tianocore/edk2";
-            rev = "refs/tags/${tianocore_tag}";
+          edk2-tianocore = pkgs.fetchFromGitHub {
+            owner = "tianocore";
+            repo = "edk2";
+            rev = "edk2-stable202408";
+            hash = "sha256-2odaTqiAZD5xduT0dwIYWj3gY/aFPVsTFbblIsEhBiA=";
             fetchSubmodules = true;
-            hash =
-              {
-                "edk2-stable202405" = "sha256-UvoTMBUSYjs7blNeRUEoheTdmpMyu2n3W6QAEdy6GQc=";
-                "edk2-stable202408" = "sha256-2odaTqiAZD5xduT0dwIYWj3gY/aFPVsTFbblIsEhBiA=";
-              }
-              .${tianocore_tag};
           };
 
-          edk2-platforms = pkgs.fetchgit {
-            url = "https://github.com/tianocore/edk2-platforms";
+          edk2-platforms = pkgs.fetchFromGitHub {
+            owner = "tianocore";
+            repo = "edk2-platforms";
             rev = "c400d971093f8a2e2e5d91c3600625a3db61c4e0";
-            hash = "sha256-JNFLdxNVqi/cvANJvDayHPAMDOjjTdZeMYDBNM2qBLo=";
+            hash = "sha256-fsyydk1Rov/srptEV8gIqj+w+6Eb2iiGiU2U0NQBMxU=";
           };
         in
         {
