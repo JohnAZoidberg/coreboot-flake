@@ -116,11 +116,6 @@
               pkgs.cmake
               pkgs.ncurses
               pkgs.gnumake
-              pkgs.clang
-              pkgs.llvmPackages.bintools
-              pkgs.libossp_uuid
-              pkgs.util-linux
-              pkgs.gnutls
             ];
 
             strictDeps = false;
