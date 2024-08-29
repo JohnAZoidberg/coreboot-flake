@@ -46,76 +46,80 @@
             rev = "c400d971093f8a2e2e5d91c3600625a3db61c4e0";
             hash = "sha256-fsyydk1Rov/srptEV8gIqj+w+6Eb2iiGiU2U0NQBMxU=";
           };
+
+          coreboot-package =
+            config:
+            pkgs.stdenv.mkDerivation {
+              pname = "coreboot-${config}";
+              version = coreboot_version;
+
+              srcs = [
+                coreboot_tarball
+                coreboot_blobs_tarball
+              ];
+
+              depsHostHost = [ pkgs.libuuid ];
+
+              depsBuildBuild = [
+                pkgs.coreboot-toolchain.i386
+                pkgs.python3
+                pkgs.imagemagick
+                pkgs.nss
+                pkgs.pkg-config
+              ];
+
+              strictDeps = true;
+
+              env = {
+                BUILD_TIMELESS = 1;
+
+                # coreboot source describes this as "misleadingly named, this is
+                # the coreboot version".  We set this to $out, so that you can
+                # always find the outpath a machine's current bootflash image by
+                # simply reading the image back (`flashrom -r`) and running
+                # `strings | grep /nix/store` on the result.
+                KERNELVERSION = builtins.placeholder "out";
+              };
+
+              enableParallelBuilding = true;
+
+              patches = [ ./0001-nix-fix.patch ];
+
+              dontFixup = true;
+
+              postPatch = ''
+                patchShebangs util/xcompile/xcompile
+                patchShebangs util/genbuild_h/genbuild_h.sh
+
+                mkdir -p payloads/external/edk2/workspace
+
+                cp -r ${edk2-platforms} payloads/external/edk2/workspace/edk2-platforms
+                chmod -R +w             payloads/external/edk2/workspace/edk2-platforms
+
+                cp -r ${edk2-tianocore} payloads/external/edk2/workspace/tianocore
+                chmod -R +w             payloads/external/edk2/workspace/tianocore
+
+                patchShebangs payloads/external/edk2/workspace/tianocore/BaseTools/BinWrappers/PosixLike
+
+                # https://github.com/tianocore/edk2/issues/6135
+                substituteInPlace payloads/external/edk2/workspace/tianocore/UefiPayloadPkg/UefiPayloadPkg.dsc \
+                    --replace-fail 'Build/UefiPayloadPkg$(BUILD_ARCH)' 'Build/UefiPayloadPkgX64'
+              '';
+
+              configurePhase = ''
+                cp -r ${./configs/${config}}/* ./
+                mv defconfig .config
+                make olddefconfig
+              '';
+
+              installPhase = ''
+                mkdir -p $out
+                install -m 0444 build/coreboot.rom $out/coreboot-${config}.rom
+              '';
+            };
         in
         {
-          coreboot-vp4670 = pkgs.stdenv.mkDerivation {
-            pname = "coreboot-vp4670";
-            version = coreboot_version;
-
-            srcs = [
-              coreboot_tarball
-              coreboot_blobs_tarball
-            ];
-
-            depsHostHost = [ pkgs.libuuid ];
-
-            depsBuildBuild = [
-              pkgs.coreboot-toolchain.i386
-              pkgs.python3
-              pkgs.imagemagick
-              pkgs.nss
-              pkgs.pkg-config
-            ];
-
-            strictDeps = true;
-
-            env = {
-              BUILD_TIMELESS = 1;
-
-              # coreboot source describes this as "misleadingly named, this is
-              # the coreboot version".  We set this to $out, so that you can
-              # always find the outpath a machine's current bootflash image by
-              # simply reading the image back (`flashrom -r`) and running
-              # `strings | grep /nix/store` on the result.
-              KERNELVERSION = builtins.placeholder "out";
-            };
-
-            enableParallelBuilding = true;
-
-            patches = [ ./0001-nix-fix.patch ];
-
-            dontFixup = true;
-
-            postPatch = ''
-              patchShebangs util/xcompile/xcompile
-              patchShebangs util/genbuild_h/genbuild_h.sh
-
-              mkdir -p payloads/external/edk2/workspace
-
-              cp -r ${edk2-platforms} payloads/external/edk2/workspace/edk2-platforms
-              chmod -R +w             payloads/external/edk2/workspace/edk2-platforms
-
-              cp -r ${edk2-tianocore} payloads/external/edk2/workspace/tianocore
-              chmod -R +w             payloads/external/edk2/workspace/tianocore
-
-              patchShebangs           payloads/external/edk2/workspace/tianocore/BaseTools/BinWrappers/PosixLike
-
-              # https://github.com/tianocore/edk2/issues/6135
-              substituteInPlace payloads/external/edk2/workspace/tianocore/UefiPayloadPkg/UefiPayloadPkg.dsc \
-                  --replace-fail 'Build/UefiPayloadPkg$(BUILD_ARCH)' 'Build/UefiPayloadPkgX64'
-            '';
-
-            configurePhase = ''
-              cp ${./vp4670/defconfig} ./.config
-              cp -r ${./vp4670} ./vp4670
-              make olddefconfig
-            '';
-
-            installPhase = ''
-              mkdir -p $out
-              install -m 0444 build/coreboot.rom $out
-            '';
-          };
+          coreboot-vp4670 = coreboot-package "vp4670";
         };
     };
 }
