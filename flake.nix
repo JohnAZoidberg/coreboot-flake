@@ -66,6 +66,8 @@
                 pkgs.imagemagick
                 pkgs.nss
                 pkgs.pkg-config
+                # for 'make nconfig'
+                pkgs.ncurses
               ];
 
               strictDeps = true;
