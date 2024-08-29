@@ -61,9 +61,7 @@
               coreboot_blobs_tarball
             ];
 
-            depsHostHost = [
-              pkgs.libuuid
-            ];
+            depsHostHost = [ pkgs.libuuid ];
 
             depsBuildBuild = [
               pkgs.coreboot-toolchain.i386
