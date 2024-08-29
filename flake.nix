@@ -123,29 +123,7 @@
               pkgs.gnutls
             ];
 
-            buildInputs = [
-              pkgs.coreboot-toolchain.i386
-              pkgs.binutils
-              pkgs.pkg-config
-              pkgs.nss
-              pkgs.python3
-              pkgs.openssl
-              pkgs.git
-              pkgs.libuuid
-              pkgs.imagemagick
-              pkgs.cmake
-              pkgs.ncurses
-              pkgs.gnumake
-              pkgs.clang
-              pkgs.llvmPackages.bintools
-              pkgs.libossp_uuid
-              pkgs.util-linux
-              pkgs.gnutls
-            ];
-
             strictDeps = false;
-
-            hardeningDisable = [ "all" ];
 
             env = {
               BUILD_TIMELESS = 1;
@@ -162,8 +140,6 @@
 
             patches = [ ./0001-nix-fix.patch ];
 
-            makeFlags = [ "V=1" ];
-
             dontFixup = true;
 
             postPatch = ''
@@ -179,6 +155,7 @@
               chmod -R +w   payloads/external/edk2/workspace/tianocore/
               patchShebangs payloads/external/edk2/workspace/tianocore/BaseTools/BinWrappers/PosixLike
               patchShebangs payloads/external/edk2/workspace/tianocore/BaseTools/BinPipWrappers/PosixLike
+
               substituteInPlace payloads/external/edk2/workspace/tianocore/UefiPayloadPkg/UefiPayloadPkg.dsc \
                   --replace-fail 'Build/UefiPayloadPkg$(BUILD_ARCH)' 'Build/UefiPayloadPkgX64'
 
