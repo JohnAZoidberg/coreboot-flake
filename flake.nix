@@ -62,15 +62,6 @@
             ];
 
             depsHostHost = [
-              pkgs.coreboot-toolchain.i386
-              pkgs.binutils
-              pkgs.pkg-config
-              pkgs.nss
-              pkgs.python3
-              pkgs.openssl
-              pkgs.git
-              pkgs.libuuid.dev
-              pkgs.libuuid.lib
               pkgs.libuuid
               pkgs.stduuid
               pkgs.libcrossguid
@@ -100,8 +91,6 @@
               pkgs.ncurses
               pkgs.libossp_uuid
             ];
-
-            makeFlags = [ "V=1" ];
 
             strictDeps = true;
 
