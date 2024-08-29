@@ -11,7 +11,7 @@
       packages."x86_64-linux" =
         let
           coreboot_version = "24.05";
-          tianocore_tag = "edk2-stable202402";
+          tianocore_tag = "edk2-stable202408";
           mrchromebox_branch = "uefipayload_202304";
 
           coreboot_tarball = pkgs.fetchurl {
@@ -21,6 +21,7 @@
                 "24.02" = "sha256-dBZYK2b/NZq/Y9qb5cTRmeQoBQZukZfe8vDDjcfEcq4=";
                 "24.02.01" = "sha256-5W9cDJAIv97BxL5kCawJNoAUD5RB79PV5Hve/8v3flA=";
                 "24.05" = "sha256-4ir9usQAaLpof9l18D9rlYWZoy5w9TnZ0MdNFqY9fOo=";
+                "24.08" = "";
               }
               .${coreboot_version};
           };
@@ -32,6 +33,7 @@
                 "24.02" = "sha256-Uck3a74vnSlDlgfVUjkipuKAH7d8Z69GmQCfks/+3/0=";
                 "24.02.01" = "sha256-jQO4LNKyWTRz1M1RHHvvf91Dg5I39sN6g4MWFmDBRCc=";
                 "24.05" = "sha256-0jaBacub79EPmv/pv3Zj5v84uArldyUV8I1LRyUKOoM=";
+                "24.08" = "";
               }
               .${coreboot_version};
           };
@@ -76,19 +78,19 @@
             fetchSubmodules = true;
             hash =
               {
-                "edk2-stable202305" = "";
                 "edk2-stable202308" = "sha256-Eoi1xf/hw/Knr7n0f0rgVof7wTgrHkmvV4eJjJV1NhM=";
                 "edk2-stable202311" = "sha256-k2synazhln95a3YBqB3Gtfx3y6ThCtvNuF8wvaTS1Mo=";
                 "edk2-stable202402" = "sha256-Nurm6QNKCyV6wvbj0ELdYAL7mbZ0yg/tTwnEJ+N18ng=";
                 "edk2-stable202405" = "sha256-UvoTMBUSYjs7blNeRUEoheTdmpMyu2n3W6QAEdy6GQc=";
+                "edk2-stable202408" = "sha256-2odaTqiAZD5xduT0dwIYWj3gY/aFPVsTFbblIsEhBiA=";
               }
               .${tianocore_tag};
           };
 
           edk2-platforms = pkgs.fetchgit {
             url = "https://github.com/tianocore/edk2-platforms";
-            rev = "debfeb1f3052ca4d9cc386b9e8aaada5f7da4c60";
-            hash = "sha256-ksTDBqoKvod/tmLPmV9Zj0Ed4JPnVerujYF3wG/2MpQ=";
+            rev = "c400d971093f8a2e2e5d91c3600625a3db61c4e0";
+            hash = "sha256-JNFLdxNVqi/cvANJvDayHPAMDOjjTdZeMYDBNM2qBLo=";
           };
         in
         {
@@ -107,14 +109,43 @@
               pkgs.pkg-config
               pkgs.nss
               pkgs.python3
-              pkgs.openssl.dev
+              pkgs.openssl
               pkgs.git
               pkgs.libuuid
-              pkgs.libuuid.dev
               pkgs.imagemagick
               pkgs.cmake
-              pkgs.ncurses.dev
+              pkgs.ncurses
+              pkgs.gnumake
+              pkgs.clang
+              pkgs.llvmPackages.bintools
+              pkgs.libossp_uuid
+              pkgs.util-linux
+              pkgs.gnutls
             ];
+
+            buildInputs = [
+              pkgs.coreboot-toolchain.i386
+              pkgs.binutils
+              pkgs.pkg-config
+              pkgs.nss
+              pkgs.python3
+              pkgs.openssl
+              pkgs.git
+              pkgs.libuuid
+              pkgs.imagemagick
+              pkgs.cmake
+              pkgs.ncurses
+              pkgs.gnumake
+              pkgs.clang
+              pkgs.llvmPackages.bintools
+              pkgs.libossp_uuid
+              pkgs.util-linux
+              pkgs.gnutls
+            ];
+
+            strictDeps = false;
+
+            hardeningDisable = [ "all" ];
 
             env = {
               BUILD_TIMELESS = 1;
@@ -127,36 +158,40 @@
               KERNELVERSION = builtins.placeholder "out";
             };
 
-            # enableParallelBuilding = true;
+            enableParallelBuilding = true;
 
             patches = [ ./0001-nix-fix.patch ];
+
+            makeFlags = [ "V=1" ];
+
+            dontFixup = true;
 
             postPatch = ''
               patchShebangs util/xcompile/xcompile
               patchShebangs util/genbuild_h/genbuild_h.sh
-            '';
-
-            configurePhase = ''
-              cp ${./vp4670/defconfig} ./.config
-              make olddefconfig
-            '';
-
-            preBuild = ''
-              cp -r ${./vp4670} ./vp4670
 
               mkdir -p payloads/external/edk2/workspace
 
               cp -r ${edk2-platforms} payloads/external/edk2/workspace/edk2-platforms
+              chmod -R +w payloads/external/edk2/workspace/edk2-platforms
 
               cp -r ${edk2-tianocore} payloads/external/edk2/workspace/tianocore
               chmod -R +w   payloads/external/edk2/workspace/tianocore/
-              patchShebangs payloads/external/edk2/workspace/tianocore/BaseTools/BinWrappers/PosixLike/TianoCompress
-              patchShebangs payloads/external/edk2/workspace/tianocore/BaseTools/BinWrappers/PosixLike/build
+              patchShebangs payloads/external/edk2/workspace/tianocore/BaseTools/BinWrappers/PosixLike
+              patchShebangs payloads/external/edk2/workspace/tianocore/BaseTools/BinPipWrappers/PosixLike
+              substituteInPlace payloads/external/edk2/workspace/tianocore/UefiPayloadPkg/UefiPayloadPkg.dsc \
+                  --replace-fail 'Build/UefiPayloadPkg$(BUILD_ARCH)' 'Build/UefiPayloadPkgX64'
 
               cp -r ${edk2-MrChromebox} payloads/external/edk2/workspace/mrchromebox
               chmod -R +w   payloads/external/edk2/workspace/mrchromebox/
-              patchShebangs payloads/external/edk2/workspace/mrchromebox/BaseTools/BinWrappers/PosixLike/TianoCompress
-              patchShebangs payloads/external/edk2/workspace/mrchromebox/BaseTools/BinWrappers/PosixLike/build
+              patchShebangs payloads/external/edk2/workspace/mrchromebox/BaseTools/BinWrappers/PosixLike
+              patchShebangs payloads/external/edk2/workspace/mrchromebox/BaseTools/BinPipWrappers/PosixLike
+            '';
+
+            configurePhase = ''
+              cp ${./vp4670/defconfig} ./.config
+              cp -r ${./vp4670} ./vp4670
+              make olddefconfig
             '';
 
             installPhase = ''
