@@ -63,13 +63,9 @@
 
             depsHostHost = [
               pkgs.libuuid
-              pkgs.stduuid
-              pkgs.libcrossguid
-              pkgs.crossguid
               pkgs.imagemagick
               pkgs.cmake
               pkgs.ncurses
-              pkgs.libossp_uuid
             ];
 
             depsBuildBuild = [
