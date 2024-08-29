@@ -67,13 +67,11 @@
 
             depsBuildBuild = [
               pkgs.coreboot-toolchain.i386
-              pkgs.pkg-config
               pkgs.nss
               pkgs.python3
               pkgs.openssl
               pkgs.imagemagick
               pkgs.cmake
-              pkgs.ncurses
             ];
 
             strictDeps = true;
