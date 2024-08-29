@@ -63,9 +63,6 @@
 
             depsHostHost = [
               pkgs.libuuid
-              pkgs.imagemagick
-              pkgs.cmake
-              pkgs.ncurses
             ];
 
             depsBuildBuild = [
@@ -76,16 +73,9 @@
               pkgs.python3
               pkgs.openssl
               pkgs.git
-              pkgs.libuuid.dev
-              pkgs.libuuid.lib
-              pkgs.libuuid
-              pkgs.stduuid
-              pkgs.libcrossguid
-              pkgs.crossguid
               pkgs.imagemagick
               pkgs.cmake
               pkgs.ncurses
-              pkgs.libossp_uuid
             ];
 
             strictDeps = true;
