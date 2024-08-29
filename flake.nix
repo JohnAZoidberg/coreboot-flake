@@ -40,6 +40,14 @@
             fetchSubmodules = true;
           };
 
+          edk2-MrChromebox = pkgs.fetchFromGitHub {
+            owner = "MrChromebox";
+            repo = "edk2";
+            rev = "78c2b10586e58b23920ec0f4d3cc1cf5fdd0b979"; # "uefipayload_2408"
+            hash = "sha256-4sjEA96K9Fu8tdSCIHlCIZY05LwdJZyS7JzAyXO9fYI=";
+            fetchSubmodules = true;
+          };
+
           edk2-platforms = pkgs.fetchFromGitHub {
             owner = "tianocore";
             repo = "edk2-platforms";
@@ -85,6 +93,8 @@
 
               enableParallelBuilding = true;
 
+              hardeningDisable = [ "all" ];
+
               patches = [ ./0001-nix-fix.patch ];
 
               dontFixup = true;
@@ -105,6 +115,15 @@
 
                 # https://github.com/tianocore/edk2/issues/6135
                 substituteInPlace payloads/external/edk2/workspace/tianocore/UefiPayloadPkg/UefiPayloadPkg.dsc \
+                    --replace-fail 'Build/UefiPayloadPkg$(BUILD_ARCH)' 'Build/UefiPayloadPkgX64'
+
+                cp -r ${edk2-MrChromebox} payloads/external/edk2/workspace/MrChromebox
+                chmod -R +w               payloads/external/edk2/workspace/MrChromebox
+
+                patchShebangs payloads/external/edk2/workspace/MrChromebox/BaseTools/BinWrappers/PosixLike
+
+                # https://github.com/tianocore/edk2/issues/6135
+                substituteInPlace payloads/external/edk2/workspace/MrChromebox/UefiPayloadPkg/UefiPayloadPkg.dsc \
                     --replace-fail 'Build/UefiPayloadPkg$(BUILD_ARCH)' 'Build/UefiPayloadPkgX64'
               '';
 
