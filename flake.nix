@@ -67,12 +67,10 @@
 
             depsBuildBuild = [
               pkgs.coreboot-toolchain.i386
-              pkgs.binutils
               pkgs.pkg-config
               pkgs.nss
               pkgs.python3
               pkgs.openssl
-              pkgs.git
               pkgs.imagemagick
               pkgs.cmake
               pkgs.ncurses
