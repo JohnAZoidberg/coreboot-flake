@@ -97,6 +97,8 @@
 
               patches = [ ./0001-nix-fix.patch ];
 
+              makeFlags = [ "V=1" ];
+
               dontFixup = true;
 
               postPatch = ''
@@ -125,6 +127,9 @@
                 # https://github.com/tianocore/edk2/issues/6135
                 substituteInPlace payloads/external/edk2/workspace/MrChromebox/UefiPayloadPkg/UefiPayloadPkg.dsc \
                     --replace-fail 'Build/UefiPayloadPkg$(BUILD_ARCH)' 'Build/UefiPayloadPkgX64'
+
+                substituteInPlace payloads/external/edk2/Makefile \
+                    --replace-fail "-a IA32" ""
               '';
 
               configurePhase = ''
