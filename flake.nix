@@ -20,7 +20,7 @@
             fetchSubmodules = true;
             hash =
               {
-                "24.05" = "sha256-4ir9usQAaLpof9l18D9rlYWZoy5w9TnZ0MdNFqY9fOo=";
+                "24.05" = "sha256-Fq3tZje6QoMskxqWd61OstgI9Sj25yijf8S3LiTJuYc=";
                 "24.08" = "sha256-BwuoBuWKHTnSwV8ubm5NqcddgxP5OMXuTl3zmwwKEsg=";
               }
               .${coreboot_version};
@@ -134,9 +134,6 @@
                 # https://github.com/tianocore/edk2/issues/6135
                 substituteInPlace payloads/external/edk2/workspace/MrChromebox/UefiPayloadPkg/UefiPayloadPkg.dsc \
                     --replace-fail 'Build/UefiPayloadPkg$(BUILD_ARCH)' 'Build/UefiPayloadPkgX64'
-
-                substituteInPlace payloads/external/edk2/Makefile \
-                    --replace-fail "-a IA32" ""
               '';
 
               configurePhase = ''
