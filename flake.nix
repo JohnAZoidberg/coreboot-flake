@@ -10,26 +10,30 @@
       formatter."x86_64-linux" = pkgs.nixfmt-rfc-style;
       packages."x86_64-linux" =
         let
-          coreboot_version = "24.05";
+          coreboot_version = "24.08";
+          coreboot_blobs_version = "24.05";
 
-          coreboot_tarball = pkgs.fetchurl {
-            url = "https://coreboot.org/releases/coreboot-${coreboot_version}.tar.xz";
+          coreboot_tarball = pkgs.fetchFromGitHub {
+            owner = "coreboot";
+            repo = "coreboot";
+            rev = coreboot_version;
+            fetchSubmodules = true;
             hash =
               {
                 "24.05" = "sha256-4ir9usQAaLpof9l18D9rlYWZoy5w9TnZ0MdNFqY9fOo=";
-                "24.08" = "";
+                "24.08" = "sha256-BwuoBuWKHTnSwV8ubm5NqcddgxP5OMXuTl3zmwwKEsg=";
               }
               .${coreboot_version};
           };
 
           coreboot_blobs_tarball = pkgs.fetchurl {
-            url = "https://coreboot.org/releases/coreboot-blobs-${coreboot_version}.tar.xz";
+            url = "https://coreboot.org/releases/coreboot-blobs-${coreboot_blobs_version}.tar.xz";
             hash =
               {
                 "24.05" = "sha256-0jaBacub79EPmv/pv3Zj5v84uArldyUV8I1LRyUKOoM=";
                 "24.08" = "";
               }
-              .${coreboot_version};
+              .${coreboot_blobs_version};
           };
 
           edk2-tianocore = pkgs.fetchFromGitHub {
@@ -61,10 +65,13 @@
               pname = "coreboot-${config}";
               version = coreboot_version;
 
-              srcs = [
-                coreboot_tarball
-                coreboot_blobs_tarball
-              ];
+              src = coreboot_tarball;
+
+              postUnpack = ''
+                tar xf ${coreboot_blobs_tarball}
+                cp -r coreboot-${coreboot_blobs_version}/* source/
+                rm -rf coreboot-${coreboot_blobs_version}
+              '';
 
               depsHostHost = [ pkgs.libuuid ];
 
