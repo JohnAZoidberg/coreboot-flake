@@ -3,32 +3,20 @@
   version,
 }:
 {
+  # board name, as in ./configs
   board,
-  stdenvNoCC,
-  python3,
+  # normal callPackage attrs
+  coreboot-toolchain,
   imagemagick,
+  libuuid,
+  ncurses,
   nss,
   pkg-config,
-  ncurses,
-  libuuid,
   pkgsBuildBuild,
+  python3,
+  stdenvNoCC,
   ...
 }:
-let
-  toolchain =
-    pkgsBuildBuild.coreboot-toolchain.${
-      {
-        i386 = "i386";
-        x86_64 = "i386";
-        arm64 = "aarch64";
-        arm = "arm";
-        riscv = "riscv";
-        powerpc = "ppc64";
-      }
-      .${stdenvNoCC.hostPlatform.linuxArch}
-    }.override
-      { withAda = stdenvNoCC.hostPlatform.isx86_64; };
-in
 stdenvNoCC.mkDerivation {
   pname = "coreboot-${board}";
   inherit version;
@@ -36,14 +24,14 @@ stdenvNoCC.mkDerivation {
   src = inputs.coreboot;
 
   depsBuildBuild = [
-    pkgsBuildBuild.stdenv.cc
-    toolchain
-    python3
+    coreboot-toolchain.i386
     imagemagick
+    libuuid
+    ncurses
     nss
     pkg-config
-    ncurses
-    libuuid
+    pkgsBuildBuild.stdenv.cc
+    python3
   ];
 
   strictDeps = true;

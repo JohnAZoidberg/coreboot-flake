@@ -57,34 +57,32 @@
     "intel-fsp": {
       "flake": false,
       "locked": {
-        "lastModified": 1719301648,
-        "narHash": "sha256-0OpMACwaVISr91yMnP+CbtOnrwXaK0M6uw+VT1nsF9I=",
+        "lastModified": 1724919353,
+        "narHash": "sha256-ena7kVGy5dn0nAlm8f+X5LbbKQ40Ke23mQ7tKRYQpC4=",
         "owner": "intel",
         "repo": "FSP",
-        "rev": "800c85770b458ee7f7eeb1276b46e904590d3bd7",
+        "rev": "307e484b9c1a1c32c868ca3fbdfd21da7ae2eb55",
         "type": "github"
       },
       "original": {
         "owner": "intel",
         "repo": "FSP",
-        "rev": "800c85770b458ee7f7eeb1276b46e904590d3bd7",
         "type": "github"
       }
     },
     "intel-microcode": {
       "flake": false,
       "locked": {
-        "lastModified": 1717202567,
-        "narHash": "sha256-64vcEc3UiiV5Rg4Eh3Wsi/WSCj5DbjvZBzKLr7EgNOU=",
+        "lastModified": 1723687167,
+        "narHash": "sha256-O2UWa04MnU9ndzvWy8fruOTm85PexEd+i1McQNz6uFE=",
         "owner": "intel",
         "repo": "Intel-Linux-Processor-Microcode-Data-Files",
-        "rev": "5278dfcf98e89098326b3eb8a85d07120a8730f8",
+        "rev": "2f5650548f37a6fb195e9e423389537a87ac95df",
         "type": "github"
       },
       "original": {
         "owner": "intel",
         "repo": "Intel-Linux-Processor-Microcode-Data-Files",
-        "rev": "5278dfcf98e89098326b3eb8a85d07120a8730f8",
         "type": "github"
       }
     },
