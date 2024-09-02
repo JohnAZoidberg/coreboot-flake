@@ -6,12 +6,10 @@
       flake = false;
     };
     intel-microcode = {
-      # url = "github:intel/Intel-Linux-Processor-Microcode-Data-Files?rev=5278dfcf98e89098326b3eb8a85d07120a8730f8";
       url = "github:intel/Intel-Linux-Processor-Microcode-Data-Files";
       flake = false;
     };
     intel-fsp = {
-      # url = "github:intel/FSP?rev=800c85770b458ee7f7eeb1276b46e904590d3bd7";
       url = "github:intel/FSP";
       flake = false;
     };
