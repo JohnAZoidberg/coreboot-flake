@@ -40,11 +40,11 @@
     "edk2-platforms": {
       "flake": false,
       "locked": {
-        "lastModified": 1725090485,
-        "narHash": "sha256-eKh61oEV77cWS12DsvJHblRSemGwTRk0uuEsZjI7bfY=",
+        "lastModified": 1725282141,
+        "narHash": "sha256-GV8yrpGlrDp4guAbDA7lzS1QJQo7UwsJtCO353UHOkc=",
         "owner": "tianocore",
         "repo": "edk2-platforms",
-        "rev": "2acddc92a4951ee885351c035ac19794644a1fd8",
+        "rev": "4f49a843ff96110fc060b9f6339892ac14e1aae0",
         "type": "github"
       },
       "original": {
