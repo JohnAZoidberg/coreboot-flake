@@ -2,7 +2,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     coreboot = {
-      url = "git+https://github.com/coreboot/coreboot?ref=refs/tags/24.08&submodules=1";
+      url = "git+https://github.com/coreboot/coreboot?submodules=1";
       flake = false;
     };
     intel-microcode = {
@@ -30,7 +30,7 @@
         pkgs = inputs.nixpkgs.legacyPackages."x86_64-linux";
         buildCoreboot = import ./pkgs/coreboot {
           inherit inputs;
-          version = "24.08";
+          version = "24.08-master";
         };
       in
       {
