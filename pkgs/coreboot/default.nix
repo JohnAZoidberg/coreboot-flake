@@ -24,19 +24,21 @@ stdenvNoCC.mkDerivation {
   src = inputs.coreboot;
 
   depsBuildBuild = [
+    pkgsBuildBuild.stdenv.cc
     coreboot-toolchain.i386
     imagemagick
     libuuid
     ncurses
     nss
     pkg-config
-    pkgsBuildBuild.stdenv.cc
     python3
   ];
 
   strictDeps = true;
 
   enableParallelBuilding = true;
+
+  patches = [ ./0001-nix-fix.patch ];
 
   postPatch = ''
     cp ${../../configs/${board}}/* ./
@@ -68,8 +70,6 @@ stdenvNoCC.mkDerivation {
     make -j$NIX_BUILD_CORES olddefconfig
     runHook postConfigure
   '';
-
-  patches = [ ./0001-nix-fix.patch ];
 
   makeFlags = [
     "BUILD_TIMELESS=1"
