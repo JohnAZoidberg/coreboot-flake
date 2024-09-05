@@ -81,9 +81,14 @@ stdenvNoCC.mkDerivation {
     "KERNELVERSION=${builtins.placeholder "out"}"
   ];
 
+  postBuild = ''
+    ./build/cbfstool build/coreboot.rom add -n serial_number -t raw -f ./serial_number
+    ./build/cbfstool build/coreboot.rom add -n system_uuid -t raw -f ./system_uuid
+  '';
+
   installPhase = ''
     runHook preInstall
-    install -D -m 0644 --target-directory=$out build/coreboot.rom
+    install -D -m 0644 --target-directory=$out build/coreboot.rom .config
     runHook postInstall
   '';
 }
