@@ -41,11 +41,11 @@
     "edk2-platforms": {
       "flake": false,
       "locked": {
-        "lastModified": 1725282141,
-        "narHash": "sha256-GV8yrpGlrDp4guAbDA7lzS1QJQo7UwsJtCO353UHOkc=",
+        "lastModified": 1725467051,
+        "narHash": "sha256-XU2RTe1iiiyxhBCPg6oRKyiu0G9+168onwu9c4OghMw=",
         "owner": "tianocore",
         "repo": "edk2-platforms",
-        "rev": "4f49a843ff96110fc060b9f6339892ac14e1aae0",
+        "rev": "f110719a508dabd57836700dc7477598c6603329",
         "type": "github"
       },
       "original": {
@@ -57,11 +57,11 @@
     "intel-fsp": {
       "flake": false,
       "locked": {
-        "lastModified": 1724919353,
-        "narHash": "sha256-ena7kVGy5dn0nAlm8f+X5LbbKQ40Ke23mQ7tKRYQpC4=",
+        "lastModified": 1725526737,
+        "narHash": "sha256-AE0eNa3A4JuMpsdOa9Fq7edUUw5icROtlDYMxzG7hh0=",
         "owner": "intel",
         "repo": "FSP",
-        "rev": "307e484b9c1a1c32c868ca3fbdfd21da7ae2eb55",
+        "rev": "4dfe5cb91bfe415c6b0e4488bd4d0cb407d06e82",
         "type": "github"
       },
       "original": {
