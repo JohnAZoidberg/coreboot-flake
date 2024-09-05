@@ -37,6 +37,7 @@
         vp4670 = pkgs.callPackage buildCoreboot {
           board = "vp4670";
         };
+        default = inputs.self.packages."x86_64-linux".vp4670;
       };
   };
 }
