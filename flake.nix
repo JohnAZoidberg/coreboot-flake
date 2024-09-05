@@ -25,7 +25,7 @@
 
   outputs = inputs: {
     formatter."x86_64-linux" = inputs.nixpkgs.legacyPackages."x86_64-linux".nixfmt-rfc-style;
-    legacyPackages."x86_64-linux" =
+    packages."x86_64-linux" =
       let
         pkgs = inputs.nixpkgs.legacyPackages."x86_64-linux";
         buildCoreboot = import ./pkgs/coreboot {
