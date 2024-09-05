@@ -83,7 +83,7 @@ stdenvNoCC.mkDerivation {
 
   installPhase = ''
     runHook preInstall
-    install -D -m 0644 --target-directory=$out build/coreboot.rom .config
+    install -D -m 0644 --target-directory=$out build/coreboot.rom
     runHook postInstall
   '';
 }
