@@ -8,6 +8,7 @@
   # normal callPackage attrs
   coreboot-toolchain,
   imagemagick,
+  lib,
   libuuid,
   ncurses,
   nss,
@@ -38,7 +39,17 @@ stdenvNoCC.mkDerivation {
 
   enableParallelBuilding = true;
 
-  patches = [ ./0001-nix-fix.patch ];
+  patches =
+    let
+      boardDir = ../../configs/${board};
+      boardFiles = builtins.attrNames (builtins.readDir boardDir);
+      boardPatches = builtins.filter (p: lib.strings.hasSuffix ".patch" p) boardFiles;
+      boardPatchesFullPath = builtins.map (patchName: ./${boardDir}/${patchName}) boardPatches;
+    in
+    [
+      ./0001-edk2-assume-both-EDK2_PATH-and-EDK2_PLATFORMS_PATH-a.patch
+    ]
+    ++ boardPatchesFullPath;
 
   postPatch = ''
     cp ${../../configs/${board}}/* ./

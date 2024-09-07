@@ -1,42 +1,24 @@
-From 1ec19fafdec1467f36a96a6f4bfa5855c4806f7f Mon Sep 17 00:00:00 2001
+From e30ead363f0e32cec911490b4c4475d30796e5cf Mon Sep 17 00:00:00 2001
 From: Matei Dibu <contact@mateidibu.dev>
-Date: Thu, 15 Aug 2024 12:27:53 +0300
-Subject: [PATCH] nix fix
+Date: Sat, 7 Sep 2024 19:03:43 +0300
+Subject: [PATCH] edk2: assume both EDK2_PATH and EDK2_PLATFORMS_PATH are
+ already present
 
 ---
- payloads/external/GRUB2/Makefile | 10 ----------
- payloads/external/edk2/Makefile  | 31 -------------------------------
- 2 files changed, 41 deletions(-)
+ payloads/external/edk2/Makefile | 37 ---------------------------------
+ 1 file changed, 37 deletions(-)
 
-diff --git a/payloads/external/GRUB2/Makefile b/payloads/external/GRUB2/Makefile
-index 4382ae60fa..d25d2071b3 100644
---- a/payloads/external/GRUB2/Makefile
-+++ b/payloads/external/GRUB2/Makefile
-@@ -15,16 +15,6 @@ all: grub2
- 
- checkout:
- 	echo "    GIT        GRUB2 $(NAME-y)"
--	test -d $(project_dir) || git clone $(project_git_repo) $(project_dir)
--	git -C $(project_dir) fetch
--ifeq ($(shell test -d $(project_dir) && \
--       (git -C $(project_dir) status --ignored=no --untracked-files=no --porcelain)),)
--	git -C $(project_dir) checkout -f $(TAG-y)
--else
--	echo "WARNING: index/tree not clean, skipping update / force checkout."
--	echo "         Checkout manually with "\
--	     "\`git -C payloads/external/GRUB2/$(project_dir) checkout -f\`."
--endif
- 
- grub2/build/config.h: $(CONFIG_DEP) | checkout
- 	echo "    CONFIG     GRUB2 $(NAME-y)"
 diff --git a/payloads/external/edk2/Makefile b/payloads/external/edk2/Makefile
-index 4cb7f0f32b..6a169c32ac 100644
+index e1986239fc..77dd48695c 100644
 --- a/payloads/external/edk2/Makefile
 +++ b/payloads/external/edk2/Makefile
-@@ -174,42 +174,11 @@ $(EDK2_PLATFORMS_PATH): $(WORKSPACE)
- 	if [ ! -d "$(EDK2_PLATFORMS_PATH)" ]; then \
- 		git clone --recurse-submodules $(CONFIG_EDK2_PLATFORMS_REPOSITORY) $(EDK2_PLATFORMS_PATH) -j5; \
- 	fi
+@@ -175,45 +175,8 @@ $(WORKSPACE):
+ 	mkdir $(WORKSPACE)
+ 
+ $(EDK2_PLATFORMS_PATH): $(WORKSPACE)
+-	if [ ! -d "$(EDK2_PLATFORMS_PATH)" ]; then \
+-		git clone --recurse-submodules $(CONFIG_EDK2_PLATFORMS_REPOSITORY) $(EDK2_PLATFORMS_PATH) -j5; \
+-	fi
 -	cd $(EDK2_PLATFORMS_PATH); \
 -		if ! git rev-parse --verify -q $(CONFIG_EDK2_PLATFORMS_TAG_OR_REV) >/dev/null; then \
 -			echo "    $(CONFIG_EDK2_PLATFORMS_TAG_OR_REV) is not a valid git reference"; \
@@ -51,9 +33,9 @@ index 4cb7f0f32b..6a169c32ac 100644
 -		git submodule update --init --checkout
  
  $(EDK2_PATH): $(WORKSPACE)
- 	if [ ! -d "$(EDK2_PATH)" ]; then \
- 		git clone --recurse-submodules $(CONFIG_EDK2_REPOSITORY) $(EDK2_PATH) -j5; \
- 	fi
+-	if [ ! -d "$(EDK2_PATH)" ]; then \
+-		git clone --recurse-submodules $(CONFIG_EDK2_REPOSITORY) $(EDK2_PATH) -j5; \
+-	fi
 -	cd $(EDK2_PATH); \
 -		git checkout MdeModulePkg/Logo/Logo.bmp > /dev/null 2>&1 || true; \
 -		if [ -e UefiPayloadPkg/ShimLayer/UniversalPayload.o ]; then \
@@ -77,5 +59,5 @@ index 4cb7f0f32b..6a169c32ac 100644
  logo: $(EDK2_PATH)
  	case "$(CONFIG_EDK2_BOOTSPLASH_FILE)" in \
 -- 
-2.45.2
+2.46.0
 
