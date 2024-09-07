@@ -44,7 +44,7 @@ stdenvNoCC.mkDerivation {
       boardDir = ../../configs/${board};
       boardFiles = builtins.attrNames (builtins.readDir boardDir);
       boardPatches = builtins.filter (p: lib.strings.hasSuffix ".patch" p) boardFiles;
-      boardPatchesFullPath = builtins.map (patchName: ./${boardDir}/${patchName}) boardPatches;
+      boardPatchesFullPath = builtins.map (patchName: /${boardDir}/${patchName}) boardPatches;
     in
     [
       ./0001-edk2-assume-both-EDK2_PATH-and-EDK2_PLATFORMS_PATH-a.patch
