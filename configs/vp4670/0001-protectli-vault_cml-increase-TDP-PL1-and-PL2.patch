@@ -1,13 +1,13 @@
-From 0c89efd7a46a2bff87206d55e6cec02b1e6ecc18 Mon Sep 17 00:00:00 2001
+From e6688929db23dc8035d9ad813b45988356d69d5b Mon Sep 17 00:00:00 2001
 From: Matei Dibu <contact@mateidibu.dev>
 Date: Sat, 7 Sep 2024 21:23:31 +0300
 Subject: [PATCH] protectli: vault_cml: increase TDP, PL1 and PL2
 
 ---
  src/mainboard/protectli/vault_cml/Makefile.mk |  1 +
- .../protectli/vault_cml/devicetree.cb         |  7 +++-
- src/mainboard/protectli/vault_cml/ramstage.c  | 38 +++++++++++++++++++
- 3 files changed, 45 insertions(+), 1 deletion(-)
+ .../protectli/vault_cml/devicetree.cb         |  7 ++++-
+ src/mainboard/protectli/vault_cml/ramstage.c  | 31 +++++++++++++++++++
+ 3 files changed, 38 insertions(+), 1 deletion(-)
  create mode 100644 src/mainboard/protectli/vault_cml/ramstage.c
 
 diff --git a/src/mainboard/protectli/vault_cml/Makefile.mk b/src/mainboard/protectli/vault_cml/Makefile.mk
@@ -42,14 +42,15 @@ index 14e604890e..c235bdca25 100644
  	register "gen2_dec" = "0x007c0a01"
 diff --git a/src/mainboard/protectli/vault_cml/ramstage.c b/src/mainboard/protectli/vault_cml/ramstage.c
 new file mode 100644
-index 0000000000..e99bc96950
+index 0000000000..38b5489cce
 --- /dev/null
 +++ b/src/mainboard/protectli/vault_cml/ramstage.c
-@@ -0,0 +1,38 @@
+@@ -0,0 +1,31 @@
 +/* SPDX-License-Identifier: GPL-2.0-only */
 +
-+#include <baseboard/variants.h>
 +#include <chip.h>
++#include <boardid.h>
++#include <device/pci_ids.h>
 +#include <intelblocks/power_limit.h>
 +
 +/*
@@ -69,20 +70,12 @@ index 0000000000..e99bc96950
 +	},
 +};
 +
++void variant_devtree_update(void);
++
 +void variant_devtree_update(void)
 +{
-+	struct soc_power_limits_config *soc_config;
-+	struct soc_intel_meteorlake_config *config = config_of_soc();
-+
-+	soc_config = variant_get_soc_power_limit_config();
-+	if (soc_config == NULL)
-+		return;
-+
 +	printk(BIOS_INFO, "Overriding TDP (%u)\n", 25);
-+
-+	const struct cpu_tdp_power_limits *limits = variant_limits;
-+	size_t total_entries = ARRAY_SIZE(variant_limits);
-+	variant_update_cpu_power_limits(limits, total_entries);
++	variant_update_cpu_power_limits(variant_limits, ARRAY_SIZE(variant_limits));
 +}
 -- 
 2.46.0
