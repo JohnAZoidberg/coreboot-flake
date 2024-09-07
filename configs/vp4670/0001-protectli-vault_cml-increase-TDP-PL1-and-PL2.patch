@@ -1,0 +1,89 @@
+From 0c89efd7a46a2bff87206d55e6cec02b1e6ecc18 Mon Sep 17 00:00:00 2001
+From: Matei Dibu <contact@mateidibu.dev>
+Date: Sat, 7 Sep 2024 21:23:31 +0300
+Subject: [PATCH] protectli: vault_cml: increase TDP, PL1 and PL2
+
+---
+ src/mainboard/protectli/vault_cml/Makefile.mk |  1 +
+ .../protectli/vault_cml/devicetree.cb         |  7 +++-
+ src/mainboard/protectli/vault_cml/ramstage.c  | 38 +++++++++++++++++++
+ 3 files changed, 45 insertions(+), 1 deletion(-)
+ create mode 100644 src/mainboard/protectli/vault_cml/ramstage.c
+
+diff --git a/src/mainboard/protectli/vault_cml/Makefile.mk b/src/mainboard/protectli/vault_cml/Makefile.mk
+index d308320b42..cbdc3dd33a 100644
+--- a/src/mainboard/protectli/vault_cml/Makefile.mk
++++ b/src/mainboard/protectli/vault_cml/Makefile.mk
+@@ -9,6 +9,7 @@ ramstage-y += mainboard.c
+ ramstage-$(CONFIG_SOC_INTEL_COMMON_BLOCK_HDA_VERB) += hda_verb.c
+ ramstage-y += gpio.c
+ ramstage-$(CONFIG_MAINBOARD_USE_LIBGFXINIT) += gma-mainboard.ads
++ramstage-y += ramstage.c
+ 
+ all-y += die.c
+ smm-y += die.c
+diff --git a/src/mainboard/protectli/vault_cml/devicetree.cb b/src/mainboard/protectli/vault_cml/devicetree.cb
+index 14e604890e..c235bdca25 100644
+--- a/src/mainboard/protectli/vault_cml/devicetree.cb
++++ b/src/mainboard/protectli/vault_cml/devicetree.cb
+@@ -2,7 +2,12 @@ chip soc/intel/cannonlake
+ 	# Enable Enhanced Intel SpeedStep
+ 	register "eist_enable" = "1"
+ 
+-	register "cpu_pl2_4_cfg" = "baseline"
++	register "cpu_pl2_4_cfg" = "performance"
++
++	register "power_limits_config" = "{
++		.tdp_pl1_override = 25,
++		.tdp_pl2_override = 35,
++	}"
+ 
+ 	register "gen1_dec" = "0x00fc0201"
+ 	register "gen2_dec" = "0x007c0a01"
+diff --git a/src/mainboard/protectli/vault_cml/ramstage.c b/src/mainboard/protectli/vault_cml/ramstage.c
+new file mode 100644
+index 0000000000..e99bc96950
+--- /dev/null
++++ b/src/mainboard/protectli/vault_cml/ramstage.c
+@@ -0,0 +1,38 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++
++#include <baseboard/variants.h>
++#include <chip.h>
++#include <intelblocks/power_limit.h>
++
++/*
++ * SKU_ID, TDP (Watts), pl1_min (milliWatts), pl1_max (milliWatts),
++ * pl2_min (milliWatts), pl2_max (milliWatts), pl4 (milliWatts)
++ * Following values are for performance config as per document #640982
++ */
++const struct cpu_tdp_power_limits variant_limits[] = {
++	{
++		.mch_id = PCI_DID_INTEL_CML_ULT_6_2,
++		.cpu_tdp = 25,
++		.pl1_min_power = 15000,
++		.pl1_max_power = 25000,
++		.pl2_min_power = 40000,
++		.pl2_max_power = 40000,
++		.pl4_power = 45000
++	},
++};
++
++void variant_devtree_update(void)
++{
++	struct soc_power_limits_config *soc_config;
++	struct soc_intel_meteorlake_config *config = config_of_soc();
++
++	soc_config = variant_get_soc_power_limit_config();
++	if (soc_config == NULL)
++		return;
++
++	printk(BIOS_INFO, "Overriding TDP (%u)\n", 25);
++
++	const struct cpu_tdp_power_limits *limits = variant_limits;
++	size_t total_entries = ARRAY_SIZE(variant_limits);
++	variant_update_cpu_power_limits(limits, total_entries);
++}
+-- 
+2.46.0
+
