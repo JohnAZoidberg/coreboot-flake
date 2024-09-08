@@ -28,7 +28,7 @@
     packages."x86_64-linux" =
       let
         pkgs = inputs.nixpkgs.legacyPackages."x86_64-linux";
-        buildCoreboot = import ./pkgs/coreboot {
+        buildCoreboot = import ./coreboot {
           inherit inputs;
           version = "24.08";
         };

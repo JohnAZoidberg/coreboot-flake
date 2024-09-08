@@ -41,7 +41,7 @@ stdenvNoCC.mkDerivation {
 
   patches =
     let
-      boardDir = ../../configs/${board};
+      boardDir = ../configs/${board};
       boardFiles = builtins.attrNames (builtins.readDir boardDir);
       boardPatches = builtins.filter (p: lib.strings.hasSuffix ".patch" p) boardFiles;
       boardPatchesFullPath = builtins.map (patchName: /${boardDir}/${patchName}) boardPatches;
@@ -52,7 +52,7 @@ stdenvNoCC.mkDerivation {
     ++ boardPatchesFullPath;
 
   postPatch = ''
-    cp ${../../configs/${board}}/* ./
+    cp ${../configs/${board}}/* ./
 
     cp -r ${inputs.intel-fsp}/*       ./3rdparty/fsp/
     cp -r ${inputs.intel-microcode}/* ./3rdparty/intel-microcode/
@@ -77,7 +77,7 @@ stdenvNoCC.mkDerivation {
 
   configurePhase = ''
     runHook preConfigure
-    cp ${../../configs/${board}/defconfig} .config
+    cp ${../configs/${board}/defconfig} .config
     make -j$NIX_BUILD_CORES olddefconfig
     runHook postConfigure
   '';
