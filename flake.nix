@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-unstable-small";
     coreboot = {
       url = "git+https://github.com/coreboot/coreboot?ref=refs/tags/24.08&submodules=1";
       flake = false;

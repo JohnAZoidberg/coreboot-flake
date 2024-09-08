@@ -41,11 +41,11 @@
     "edk2-platforms": {
       "flake": false,
       "locked": {
-        "lastModified": 1725467051,
-        "narHash": "sha256-XU2RTe1iiiyxhBCPg6oRKyiu0G9+168onwu9c4OghMw=",
+        "lastModified": 1725611842,
+        "narHash": "sha256-yDeqJYxZ45TZpBjSkTHK36ZAfWKoJVPEzgQ07E1ZkGk=",
         "owner": "tianocore",
         "repo": "edk2-platforms",
-        "rev": "f110719a508dabd57836700dc7477598c6603329",
+        "rev": "76eb7fee0c421a01407b70f9bac67e2b5b58b5f2",
         "type": "github"
       },
       "original": {
@@ -88,16 +88,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1725194671,
-        "narHash": "sha256-tLGCFEFTB5TaOKkpfw3iYT9dnk4awTP/q4w+ROpMfuw=",
+        "lastModified": 1725752909,
+        "narHash": "sha256-1oWXjps/B6IZYz7/iGgk8B0foVZREC+8pg8I28BF75k=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "b833ff01a0d694b910daca6e2ff4a3f26dee478c",
+        "rev": "93961c50306be724df8a69cfa60866c2c49d1d06",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixpkgs-unstable",
+        "ref": "nixos-unstable-small",
         "repo": "nixpkgs",
         "type": "github"
       }
