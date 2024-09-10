@@ -73,11 +73,11 @@
     "intel-microcode": {
       "flake": false,
       "locked": {
-        "lastModified": 1723687167,
-        "narHash": "sha256-O2UWa04MnU9ndzvWy8fruOTm85PexEd+i1McQNz6uFE=",
+        "lastModified": 1725991323,
+        "narHash": "sha256-cn0qK81dwbamh5PBlPuC9KtDWyT2NwSxDD0XlCRAv6s=",
         "owner": "intel",
         "repo": "Intel-Linux-Processor-Microcode-Data-Files",
-        "rev": "2f5650548f37a6fb195e9e423389537a87ac95df",
+        "rev": "fbfe741896c55b36fcbf0560a68be96286103556",
         "type": "github"
       },
       "original": {
