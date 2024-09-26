@@ -41,11 +41,11 @@
     "edk2-platforms": {
       "flake": false,
       "locked": {
-        "lastModified": 1725611842,
-        "narHash": "sha256-yDeqJYxZ45TZpBjSkTHK36ZAfWKoJVPEzgQ07E1ZkGk=",
+        "lastModified": 1727237048,
+        "narHash": "sha256-frEE0EtRjGxgmVbnqRA1VUwgNGmW0EulOKJ3N1PYczg=",
         "owner": "tianocore",
         "repo": "edk2-platforms",
-        "rev": "76eb7fee0c421a01407b70f9bac67e2b5b58b5f2",
+        "rev": "528298bf502fe45ea1da1d65ad7e6dc94f056f5a",
         "type": "github"
       },
       "original": {
@@ -57,11 +57,11 @@
     "intel-fsp": {
       "flake": false,
       "locked": {
-        "lastModified": 1725526737,
-        "narHash": "sha256-AE0eNa3A4JuMpsdOa9Fq7edUUw5icROtlDYMxzG7hh0=",
+        "lastModified": 1726126093,
+        "narHash": "sha256-8OFehXVF72AiORHjXzeYfI6w7ocQrne9eDqBa1/s3U8=",
         "owner": "intel",
         "repo": "FSP",
-        "rev": "4dfe5cb91bfe415c6b0e4488bd4d0cb407d06e82",
+        "rev": "02b30da989444aa988ebb00c00c414bb662babd3",
         "type": "github"
       },
       "original": {
@@ -88,16 +88,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1725990404,
-        "narHash": "sha256-zjSZ0gH4d2EKfsAswZXtpNiTx4K47tFCyGFKspfv1tY=",
+        "lastModified": 1727320268,
+        "narHash": "sha256-B4AK91+9frHerQ6mFAtaR46ECMRtZufrtXFj/b5NqYU=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "aa2c4fc81bf56b380c21c502487bdf75ed51abe9",
+        "rev": "ea2838e1ce0a9da2abf88275843aca29d9f82b30",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixos-unstable-small",
+        "ref": "refs/heads/nixos-unstable-small",
         "repo": "nixpkgs",
         "type": "github"
       }

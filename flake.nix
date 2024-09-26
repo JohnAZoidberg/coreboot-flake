@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-unstable-small";
+    nixpkgs.url = "github:NixOS/nixpkgs?ref=refs/heads/nixos-unstable-small";
     coreboot = {
       url = "git+https://github.com/coreboot/coreboot?ref=refs/tags/24.08&submodules=1";
       flake = false;
@@ -34,9 +34,7 @@
         };
       in
       {
-        vp4670 = pkgs.callPackage buildCoreboot {
-          board = "vp4670";
-        };
+        vp4670 = pkgs.callPackage buildCoreboot { board = "vp4670"; };
         default = inputs.self.packages."x86_64-linux".vp4670;
       };
   };

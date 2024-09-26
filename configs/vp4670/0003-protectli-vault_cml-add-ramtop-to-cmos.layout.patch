@@ -1,0 +1,28 @@
+From e32a868faa153a5bbf1457137a4e32aaeacebba5 Mon Sep 17 00:00:00 2001
+From: Matei Dibu <contact@mateidibu.dev>
+Date: Thu, 26 Sep 2024 17:05:09 +0300
+Subject: [PATCH] protectli/vault_cml: add ramtop to cmos.layout
+
+---
+ src/mainboard/protectli/vault_cml/cmos.layout | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/src/mainboard/protectli/vault_cml/cmos.layout b/src/mainboard/protectli/vault_cml/cmos.layout
+index b2f8e319c8..44aaf7528c 100644
+--- a/src/mainboard/protectli/vault_cml/cmos.layout
++++ b/src/mainboard/protectli/vault_cml/cmos.layout
+@@ -2,7 +2,10 @@
+ 
+ entries
+ 
+-0	384	r	0	reserved_memory
++0	304	r	0	reserved_memory
++
++# coreboot config options: ramtop
++304	80	h	0	ramtop
+ 
+ # RTC_BOOT_BYTE (coreboot hardcoded)
+ 384	1	e	2	boot_option
+-- 
+2.46.0
+
