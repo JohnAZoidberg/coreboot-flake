@@ -1,8 +1,8 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs?ref=refs/heads/nixos-unstable-small";
+    nixpkgs.url = "github:NixOS/nixpkgs?ref=refs/heads/nixpkgs-unstable";
     coreboot = {
-      url = "git+https://github.com/coreboot/coreboot?ref=refs/tags/24.08&submodules=1";
+      url = "git+https://review.coreboot.org/coreboot.git?ref=refs/heads/main&submodules=1";
       flake = false;
     };
     intel-microcode = {
@@ -23,19 +23,24 @@
     };
   };
 
-  outputs = inputs: {
-    formatter."x86_64-linux" = inputs.nixpkgs.legacyPackages."x86_64-linux".nixfmt-rfc-style;
-    packages."x86_64-linux" =
-      let
-        pkgs = inputs.nixpkgs.legacyPackages."x86_64-linux";
-        buildCoreboot = import ./coreboot {
-          inherit inputs;
-          version = "24.08";
+  outputs =
+    inputs:
+    let
+      pkgs = inputs.nixpkgs.legacyPackages."x86_64-linux";
+    in
+    {
+      formatter."x86_64-linux" = pkgs.nixfmt-rfc-style;
+      packages."x86_64-linux" = {
+        vp4670 = pkgs.callPackage ./coreboot {
+          board = "vp4670";
+          inherit (inputs)
+            coreboot
+            intel-microcode
+            intel-fsp
+            edk2-platforms
+            edk2-mrchromebox
+            ;
         };
-      in
-      {
-        vp4670 = pkgs.callPackage buildCoreboot { board = "vp4670"; };
-        default = inputs.self.packages."x86_64-linux".vp4670;
       };
-  };
+    };
 }

@@ -1,8 +1,10 @@
 {
-  inputs,
-  version,
-}:
-{
+  # flake inputs
+  coreboot,
+  intel-fsp,
+  intel-microcode,
+  edk2-platforms,
+  edk2-mrchromebox,
   # board name, as in ./configs
   board,
   # normal callPackage attrs
@@ -20,9 +22,9 @@
 }:
 stdenvNoCC.mkDerivation {
   pname = "coreboot-${board}";
-  inherit version;
+  version = coreboot.shortRev;
 
-  src = inputs.coreboot;
+  src = coreboot;
 
   depsBuildBuild = [
     pkgsBuildBuild.stdenv.cc
@@ -54,19 +56,19 @@ stdenvNoCC.mkDerivation {
   postPatch = ''
     cp ${../configs/${board}}/* ./
 
-    cp -r ${inputs.intel-fsp}/*       ./3rdparty/fsp/
-    cp -r ${inputs.intel-microcode}/* ./3rdparty/intel-microcode/
+    cp -r ${intel-fsp}/*       ./3rdparty/fsp/
+    cp -r ${intel-microcode}/* ./3rdparty/intel-microcode/
 
     patchShebangs util/xcompile/xcompile
     patchShebangs util/genbuild_h/genbuild_h.sh
 
     mkdir -p payloads/external/edk2/workspace
 
-    cp -r ${inputs.edk2-platforms} payloads/external/edk2/workspace/edk2-platforms
-    chmod -R +w                    payloads/external/edk2/workspace/edk2-platforms
+    cp -r ${edk2-platforms} payloads/external/edk2/workspace/edk2-platforms
+    chmod -R +w             payloads/external/edk2/workspace/edk2-platforms
 
-    cp -r ${inputs.edk2-mrchromebox} payloads/external/edk2/workspace/MrChromebox
-    chmod -R +w                      payloads/external/edk2/workspace/MrChromebox
+    cp -r ${edk2-mrchromebox} payloads/external/edk2/workspace/MrChromebox
+    chmod -R +w               payloads/external/edk2/workspace/MrChromebox
 
     patchShebangs payloads/external/edk2/workspace/MrChromebox/BaseTools/BinWrappers/PosixLike
 
