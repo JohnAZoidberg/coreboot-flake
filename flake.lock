@@ -3,11 +3,11 @@
     "coreboot": {
       "flake": false,
       "locked": {
-        "lastModified": 1734157393,
-        "narHash": "sha256-MIj23jFP85ebpH4L9XzIYBqiLpHFMwsBJ5296If4g6E=",
+        "lastModified": 1735739912,
+        "narHash": "sha256-WyFvb5vb1ZHHffwAYBwF4pzTFEcn9m4NxeWg/MOu0zk=",
         "ref": "refs/heads/main",
-        "rev": "eeb6f67eecc6b190f5defe7279d6333e08fb4a88",
-        "revCount": 58362,
+        "rev": "a1f97b93c6ddc5f21741696b04556009ad4e72bb",
+        "revCount": 58494,
         "submodules": true,
         "type": "git",
         "url": "https://review.coreboot.org/coreboot.git"
@@ -41,11 +41,11 @@
     "edk2-platforms": {
       "flake": false,
       "locked": {
-        "lastModified": 1733971123,
-        "narHash": "sha256-2n9ZZ4QBI6DqX+Keiabpiw2D6biaZVGOsu00dSHnrp8=",
+        "lastModified": 1734598476,
+        "narHash": "sha256-Y9dCYjLBt2Fmbjs4c76Nw13jM2gboAeuK2smc4P3xRs=",
         "owner": "tianocore",
         "repo": "edk2-platforms",
-        "rev": "8383fb3d45b8afa1e28295b35cf69a50f12fd725",
+        "rev": "64170733ed98ba8d9a01ba5e396360e7552826c8",
         "type": "github"
       },
       "original": {
@@ -57,11 +57,11 @@
     "intel-fsp": {
       "flake": false,
       "locked": {
-        "lastModified": 1733724528,
-        "narHash": "sha256-R/IsLJCBdtPS7EGlrhNR/NnytdNWHvb2q6SwiVLJhXM=",
+        "lastModified": 1735201439,
+        "narHash": "sha256-KNU/Dl7sYpOb1rm7Rg0ZKO9pEfff4Z0zRZ6PXtVtFLE=",
         "owner": "intel",
         "repo": "FSP",
-        "rev": "909cf43ad6ccebb6adee482bc0a4f098c32c9a6d",
+        "rev": "e276be95bac39f7f56a6755c0da105bcce283bfa",
         "type": "github"
       },
       "original": {
@@ -88,11 +88,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1733935885,
-        "narHash": "sha256-xyiHLs6KJ1fxeGmcCxKjJE4yJknVJxbC8Y/ZRYyC8WE=",
+        "lastModified": 1735617354,
+        "narHash": "sha256-5zJyv66q68QZJZsXtmjDBazGnF0id593VSy+8eSckoo=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "5a48e3c2e435e95103d56590188cfed7b70e108c",
+        "rev": "69b9a8c860bdbb977adfa9c5e817ccb717884182",
         "type": "github"
       },
       "original": {
