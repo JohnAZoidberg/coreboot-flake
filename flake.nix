@@ -42,6 +42,16 @@
             intel-fsp
             ;
         };
+        t440p = pkgs.callPackage ./coreboot {
+          board = "t440p";
+          inherit (inputs)
+            coreboot
+            edk2-platforms
+            edk2-mrchromebox
+            intel-microcode
+            intel-fsp
+            ;
+        };
       };
     };
 }

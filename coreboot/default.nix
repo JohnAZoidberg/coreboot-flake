@@ -61,6 +61,7 @@ stdenvNoCC.mkDerivation {
 
     patchShebangs util/xcompile/xcompile
     patchShebangs util/genbuild_h/genbuild_h.sh
+    patchShebangs util/me_cleaner/me_cleaner.py
 
     mkdir -p payloads/external/edk2/workspace
 
@@ -94,10 +95,19 @@ stdenvNoCC.mkDerivation {
     "KERNELVERSION=${builtins.placeholder "out"}"
   ];
 
-  postBuild = ''
-    ./build/cbfstool build/coreboot.rom add -n serial_number -t raw -f ./serial_number
-    ./build/cbfstool build/coreboot.rom add -n system_uuid -t raw -f ./system_uuid
-  '';
+  postBuild =
+    let
+      f =
+        file:
+        lib.strings.optionalString (builtins.pathExists ../configs/${board}/${file}) ''
+          ./build/cbfstool build/coreboot.rom add -n ${file} -t raw -f ./${file}
+        '';
+      files = [
+        "serial_number"
+        "system_uuid"
+      ];
+    in
+    lib.strings.concatStrings (builtins.map f files);
 
   installPhase = ''
     runHook preInstall
