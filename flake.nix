@@ -28,30 +28,29 @@
     let
       system = "x86_64-linux";
       pkgs = inputs.nixpkgs.legacyPackages."x86_64-linux";
+      lib = inputs.nixpkgs.lib;
     in
     {
       formatter.${system} = pkgs.nixfmt-rfc-style;
-      packages.${system} = {
-        vp4670 = pkgs.callPackage ./coreboot {
-          board = "vp4670";
-          inherit (inputs)
-            coreboot
-            edk2-platforms
-            edk2-mrchromebox
-            intel-microcode
-            intel-fsp
-            ;
-        };
-        t440p = pkgs.callPackage ./coreboot {
-          board = "t440p";
-          inherit (inputs)
-            coreboot
-            edk2-platforms
-            edk2-mrchromebox
-            intel-microcode
-            intel-fsp
-            ;
-        };
-      };
+      packages.${system} =
+        let
+          mkCoreboot = board: {
+            ${board} = pkgs.callPackage ./coreboot {
+              inherit board;
+              inherit (inputs)
+                coreboot
+                edk2-platforms
+                edk2-mrchromebox
+                intel-microcode
+                intel-fsp
+                ;
+            };
+          };
+          targets = [
+            "t440p"
+            "vp4670"
+          ];
+        in
+        lib.attrsets.mergeAttrsList (builtins.map mkCoreboot targets);
     };
 }
