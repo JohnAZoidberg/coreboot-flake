@@ -34,7 +34,6 @@
         "url": "https://review.coreboot.org/coreboot.git"
       },
       "original": {
-        "ref": "refs/heads/main",
         "submodules": true,
         "type": "git",
         "url": "https://review.coreboot.org/coreboot.git"
@@ -43,17 +42,17 @@
     "edk2-mrchromebox": {
       "flake": false,
       "locked": {
-        "lastModified": 1730897630,
-        "narHash": "sha256-CV39aW64xbNd1g7M2rSPMk0RadGxrzPzFpf6kHlKCwE=",
-        "ref": "refs/heads/uefipayload_2408",
-        "rev": "230d3417dd0acd9b5b83c7e9ab749c18e3571184",
-        "revCount": 33103,
+        "lastModified": 1736122041,
+        "narHash": "sha256-8B87Ed68L+GtohXL30rxi/Pp4RdLSuN5h7OVURMpo7A=",
+        "ref": "refs/heads/uefipayload_2501",
+        "rev": "fc38b7cb2e0ed46b5d6decb460ef7841ba476004",
+        "revCount": 33608,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/MrChromebox/edk2"
       },
       "original": {
-        "ref": "refs/heads/uefipayload_2408",
+        "ref": "refs/heads/uefipayload_2501",
         "submodules": true,
         "type": "git",
         "url": "https://github.com/MrChromebox/edk2"
