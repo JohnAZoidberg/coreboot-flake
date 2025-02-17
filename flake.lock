@@ -8,11 +8,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1737728850,
-        "narHash": "sha256-vzDmgZ1kabldBXqRKmOWBUkQ3mhrthnlZKagNhpi6Gg=",
+        "lastModified": 1739440905,
+        "narHash": "sha256-1FcALiisAuvy/cuDiz/AjlXhjjxUH/GamwGrzln/lj4=",
         "owner": "numtide",
         "repo": "blueprint",
-        "rev": "d9d31d08528233f08f1040b0495ca9e53943314a",
+        "rev": "3796f757f06826d1b3b157bc99f1d68b9e3a4258",
         "type": "github"
       },
       "original": {
@@ -24,11 +24,11 @@
     "coreboot": {
       "flake": false,
       "locked": {
-        "lastModified": 1737910738,
-        "narHash": "sha256-Dnvlr1tR4XQfZ1roUgNervl96Xho8ZVDlZmTsR9qgOw=",
+        "lastModified": 1739769398,
+        "narHash": "sha256-wSS0Oe/wzGZbjFVDyPlC6EPJVU8GbdFh9f2qkyhVJso=",
         "ref": "refs/heads/main",
-        "rev": "798e87da5171df33b479a5fae8419ece0c8dd7fb",
-        "revCount": 58796,
+        "rev": "29054bc9c76d22c6fb0058bbe3dd5609dd07598e",
+        "revCount": 58997,
         "submodules": true,
         "type": "git",
         "url": "https://review.coreboot.org/coreboot.git"
@@ -61,11 +61,11 @@
     "edk2-platforms": {
       "flake": false,
       "locked": {
-        "lastModified": 1737498014,
-        "narHash": "sha256-n0C7qIQVZ6TGKFBTMjnmj30E996Do+IPZfpKiAJBLxs=",
+        "lastModified": 1739239082,
+        "narHash": "sha256-UdsG9KN+S+gthIceU6WgIyt9+olgcxBGBnN6KRd3HLQ=",
         "owner": "tianocore",
         "repo": "edk2-platforms",
-        "rev": "400b3e083d5353292def78ea52663c5717e679a2",
+        "rev": "4ce9e8d02cb447a8506a070f06e68bca95bcbbe0",
         "type": "github"
       },
       "original": {
@@ -77,11 +77,11 @@
     "intel-fsp": {
       "flake": false,
       "locked": {
-        "lastModified": 1737433467,
-        "narHash": "sha256-z9vHk3u16D1Zuwd6uhWKTQDDJX1JoXkGDS8g/nkFBag=",
+        "lastModified": 1739408712,
+        "narHash": "sha256-7l41qbqR4/hPrQHzMuQAnZFfFQ37pwNGOJv1juo1nLk=",
         "owner": "intel",
         "repo": "FSP",
-        "rev": "15c0f7b3f723bcd713e5ab11ebc502f30d9084e7",
+        "rev": "29e0f7ae5d26d827089a2e6446cda0852ac2146f",
         "type": "github"
       },
       "original": {
@@ -93,11 +93,11 @@
     "intel-microcode": {
       "flake": false,
       "locked": {
-        "lastModified": 1731431661,
-        "narHash": "sha256-dvXt4SX/90oFM4GR9R7C2udhZ+plxnabOZpbtwN3V8Q=",
+        "lastModified": 1739293397,
+        "narHash": "sha256-XfBVygHmUAV287MyBreoAyGcffGBEY7YKyj6AOytXZ4=",
         "owner": "intel",
         "repo": "Intel-Linux-Processor-Microcode-Data-Files",
-        "rev": "8ac9378a84879e81c503e09f344560b3dd7f72df",
+        "rev": "8a62de41c011615d749f8e72bb906dddc72e56a8",
         "type": "github"
       },
       "original": {
@@ -108,11 +108,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1737942377,
-        "narHash": "sha256-8Eo/jRAgT3CbAloyqOj6uPN1EqBvLI/Tv2g+RxHjkhU=",
+        "lastModified": 1739698114,
+        "narHash": "sha256-8S9n69Dnpg8DhfFlP0YvMGmSOY2X4kImGSPWXYNpaHM=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "88a55dffa4d44d294c74c298daf75824dc0aafb5",
+        "rev": "b1b43d32be000928cc71250ed77f4a0a5f2bc23a",
         "type": "github"
       },
       "original": {
