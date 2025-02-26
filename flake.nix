@@ -13,7 +13,7 @@
       flake = false;
     };
     edk2-mrchromebox = {
-      url = "git+https://github.com/MrChromebox/edk2?ref=refs/heads/uefipayload_2501&submodules=1";
+      url = "git+https://github.com/MrChromebox/edk2?ref=refs/heads/uefipayload_2502&submodules=1";
       flake = false;
     };
     intel-microcode = {
