@@ -8,11 +8,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1758687491,
-        "narHash": "sha256-sy8Q+MfBe+MZzYj4MJwBDe4lkLnmhy1POO86hWZgqO8=",
+        "lastModified": 1761645416,
+        "narHash": "sha256-wTQzbbQ6XHtvNJVuhJj+ytZDRyNtwUKbrIfIvMvKNfQ=",
         "owner": "numtide",
         "repo": "blueprint",
-        "rev": "7ecaeb70f63d14a397c73b38f57177894bb795c8",
+        "rev": "633af1961cae8e02bc6195e6e599a6b09bf75217",
         "type": "github"
       },
       "original": {
@@ -24,11 +24,11 @@
     "coreboot": {
       "flake": false,
       "locked": {
-        "lastModified": 1761189084,
-        "narHash": "sha256-6ttxiI855kSZo8QnzlN/U0CABcPokgp2qp0984CxLXE=",
+        "lastModified": 1761807404,
+        "narHash": "sha256-zT6S2GEyD4OBBjc2TguHGmshk0Zl3qlk1wobi5KHcEI=",
         "ref": "refs/heads/main",
-        "rev": "752d49a4ffe98b731eb5a7c1beccff49f0418faa",
-        "revCount": 61202,
+        "rev": "784d8f25f90cce36a737c0d249ea1277e23d9911",
+        "revCount": 61240,
         "submodules": true,
         "type": "git",
         "url": "https://review.coreboot.org/coreboot.git"
@@ -61,11 +61,11 @@
     "edk2-platforms": {
       "flake": false,
       "locked": {
-        "lastModified": 1761123709,
-        "narHash": "sha256-j4gFC5t6l4uZqGkwplqlRfYMGuakY1FQ+XiKqp0Cgag=",
+        "lastModified": 1761771624,
+        "narHash": "sha256-/0jwmbid+21njGqc3IhoEEOKFKO8zkNSD4a5ehI4yrg=",
         "owner": "tianocore",
         "repo": "edk2-platforms",
-        "rev": "28acb27feebf5ab17d8371ff23c0061903794dba",
+        "rev": "2fe8d0187dc314c9ef98fe0711c795b40124fad3",
         "type": "github"
       },
       "original": {
@@ -108,11 +108,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1760965567,
-        "narHash": "sha256-0JDOal5P7xzzAibvD0yTE3ptyvoVOAL0rcELmDdtSKg=",
+        "lastModified": 1761656231,
+        "narHash": "sha256-EiED5k6gXTWoAIS8yQqi5mAX6ojnzpHwAQTS3ykeYMg=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "cb82756ecc37fa623f8cf3e88854f9bf7f64af93",
+        "rev": "e99366c665bdd53b7b500ccdc5226675cfc51f45",
         "type": "github"
       },
       "original": {
