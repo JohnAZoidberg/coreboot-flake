@@ -24,11 +24,11 @@
     "coreboot": {
       "flake": false,
       "locked": {
-        "lastModified": 1762961992,
-        "narHash": "sha256-myBcGNhi7fdt9+RIbA+0zyxEWTzDyp4kLL+ORHMg5qI=",
+        "lastModified": 1763004819,
+        "narHash": "sha256-LepWk8aq0fIbgFFq8oKkhqpzeO51HHJjUj7HORHgSkQ=",
         "ref": "refs/heads/main",
-        "rev": "d4bee96484dfe1fda8f983c0e088c29b4ad115c8",
-        "revCount": 61353,
+        "rev": "ace2e540d00327fb9598dcf65551d18a1f07cffb",
+        "revCount": 61356,
         "submodules": true,
         "type": "git",
         "url": "https://review.coreboot.org/coreboot.git"
@@ -42,17 +42,17 @@
     "edk2-mrchromebox": {
       "flake": false,
       "locked": {
-        "lastModified": 1753291193,
-        "narHash": "sha256-Jrqy/bhXTv9GkIgc1FK6vQ6iLegaZMB+ECRBd91ivnQ=",
-        "ref": "refs/heads/uefipayload_2505",
-        "rev": "12f70cd34a10da6898a40c0f616effb944cdcb25",
-        "revCount": 34384,
+        "lastModified": 1762810546,
+        "narHash": "sha256-TCuTc1XDLmM5bQqRkujLhy31bUPtNgnAJvJq4VxVgmo=",
+        "ref": "refs/heads/uefipayload_2508",
+        "rev": "9a383d2c808675f4af13b4075cb76760f4e8e8b5",
+        "revCount": 34807,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/MrChromebox/edk2"
       },
       "original": {
-        "ref": "refs/heads/uefipayload_2505",
+        "ref": "refs/heads/uefipayload_2508",
         "submodules": true,
         "type": "git",
         "url": "https://github.com/MrChromebox/edk2"
@@ -108,11 +108,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1762604901,
-        "narHash": "sha256-Pr2jpryIaQr9Yx8p6QssS03wqB6UifnnLr3HJw9veDw=",
+        "lastModified": 1762943920,
+        "narHash": "sha256-ITeH8GBpQTw9457ICZBddQEBjlXMmilML067q0e6vqY=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "f6b44b2401525650256b977063dbcf830f762369",
+        "rev": "91c9a64ce2a84e648d0cf9671274bb9c2fb9ba60",
         "type": "github"
       },
       "original": {
