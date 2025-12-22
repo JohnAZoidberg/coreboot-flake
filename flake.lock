@@ -24,11 +24,11 @@
     "coreboot": {
       "flake": false,
       "locked": {
-        "lastModified": 1766156823,
-        "narHash": "sha256-twn39zOVMYUGjhi1l+rh9K+s8bdl+HwFKs4S8p1QrkY=",
+        "lastModified": 1766383498,
+        "narHash": "sha256-mt2NvGNtlyF1D0yH9WSvEZqch61kQCdfzRAbv436lIs=",
         "ref": "refs/heads/main",
-        "rev": "76e963534602ac1a100a622e0cfc7e0ea3638839",
-        "revCount": 61755,
+        "rev": "188cd88ac7d6f7af4b0a2ca832e096c1e9d8bf6f",
+        "revCount": 61779,
         "submodules": true,
         "type": "git",
         "url": "https://review.coreboot.org/coreboot.git"
@@ -77,11 +77,11 @@
     "intel-fsp": {
       "flake": false,
       "locked": {
-        "lastModified": 1766109945,
-        "narHash": "sha256-hReddBs+LEble3Ar3Bj92M8vXNuNbv/8FKzZ1hqJO2E=",
+        "lastModified": 1766367505,
+        "narHash": "sha256-MZvALLZeTTu7V3nZIqlJ8k1tPwdU7v9QacLU6cnX6oc=",
         "owner": "intel",
         "repo": "FSP",
-        "rev": "b221ba5eb8fab7dc76790a41cf1bdef7da447a5f",
+        "rev": "a5b3d0e056ad713f0055334427bc424f91aa6602",
         "type": "github"
       },
       "original": {
@@ -108,11 +108,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1766125104,
-        "narHash": "sha256-l/YGrEpLromL4viUo5GmFH3K5M1j0Mb9O+LiaeCPWEM=",
+        "lastModified": 1766314097,
+        "narHash": "sha256-laJftWbghBehazn/zxVJ8NdENVgjccsWAdAqKXhErrM=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "7d853e518814cca2a657b72eeba67ae20ebf7059",
+        "rev": "306ea70f9eb0fb4e040f8540e2deab32ed7e2055",
         "type": "github"
       },
       "original": {
