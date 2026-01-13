@@ -8,11 +8,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1763308703,
-        "narHash": "sha256-O9Y+Wer8wOh+N+4kcCK5p/VLrXyX+ktk0/s3HdZvJzk=",
+        "lastModified": 1767386128,
+        "narHash": "sha256-BJDu7dIMauO2nYRSL4aI8wDNtEm2KOb7lDKP3hxdrpo=",
         "owner": "numtide",
         "repo": "blueprint",
-        "rev": "5a9bba070f801d63e2af3c9ef00b86b212429f4f",
+        "rev": "0ed984d51a3031065925ab08812a5434f40b93d4",
         "type": "github"
       },
       "original": {
@@ -24,11 +24,11 @@
     "coreboot": {
       "flake": false,
       "locked": {
-        "lastModified": 1766383498,
-        "narHash": "sha256-mt2NvGNtlyF1D0yH9WSvEZqch61kQCdfzRAbv436lIs=",
+        "lastModified": 1768265192,
+        "narHash": "sha256-eENHnOY8rX7tbRVzp47wUOZ7Q5xqBSiuD5KUW0gEc5U=",
         "ref": "refs/heads/main",
-        "rev": "188cd88ac7d6f7af4b0a2ca832e096c1e9d8bf6f",
-        "revCount": 61779,
+        "rev": "a5c0307e9c8aeb613028c0790c4c10aa8e48fb4c",
+        "revCount": 61888,
         "submodules": true,
         "type": "git",
         "url": "https://review.coreboot.org/coreboot.git"
@@ -42,11 +42,11 @@
     "edk2-mrchromebox": {
       "flake": false,
       "locked": {
-        "lastModified": 1765920461,
-        "narHash": "sha256-QVVbC7rZz3Js5Fu5+I51K+3A91lBOINwI4vaexad6GM=",
+        "lastModified": 1767999705,
+        "narHash": "sha256-BH4tetjMi6xjbuo3+Tq4gR34UwBgyGLEOl+66FeTfsU=",
         "ref": "refs/heads/uefipayload_2511",
-        "rev": "7b143381a8eb934fd5c8fcc988640aadca0dd70c",
-        "revCount": 35207,
+        "rev": "72b7f2af0772579e9441685734603238e80323ca",
+        "revCount": 35203,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/MrChromebox/edk2"
@@ -61,11 +61,11 @@
     "edk2-platforms": {
       "flake": false,
       "locked": {
-        "lastModified": 1764881465,
-        "narHash": "sha256-jrAsRMOU1iPbVhXpDmWAtt/2X9yR4GEx5XJPw1gaVYA=",
+        "lastModified": 1767722477,
+        "narHash": "sha256-IdACr0NStqEpC0TFoKKgDwKT2mqyJwVXW/B7hlRXccI=",
         "owner": "tianocore",
         "repo": "edk2-platforms",
-        "rev": "c3dac0ff7b9ae7a2194a0f02d5aea647ca555b0e",
+        "rev": "0991a0b643509d900e5d023a0116789827a696e5",
         "type": "github"
       },
       "original": {
@@ -108,11 +108,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1766314097,
-        "narHash": "sha256-laJftWbghBehazn/zxVJ8NdENVgjccsWAdAqKXhErrM=",
+        "lastModified": 1768178648,
+        "narHash": "sha256-kz/F6mhESPvU1diB7tOM3nLcBfQe7GU7GQCymRlTi/s=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "306ea70f9eb0fb4e040f8540e2deab32ed7e2055",
+        "rev": "3fbab70c6e69c87ea2b6e48aa6629da2aa6a23b0",
         "type": "github"
       },
       "original": {
