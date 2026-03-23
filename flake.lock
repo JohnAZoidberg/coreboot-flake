@@ -24,11 +24,11 @@
     "coreboot": {
       "flake": false,
       "locked": {
-        "lastModified": 1773109888,
-        "narHash": "sha256-/fjzex8EaWEqHBwpYV0HMzQB7n5VcpjIAfwnS32jXgI=",
+        "lastModified": 1774117552,
+        "narHash": "sha256-FJrlOIaFAyAGeOEum4QZdeLDTTAFY0Own27AjpQ5Akg=",
         "ref": "refs/heads/main",
-        "rev": "ee3aef1c72e91901d75fbc7afac7cdf36b191fe9",
-        "revCount": 62536,
+        "rev": "b7faa4c51a54d79dc18b2745d644a15342a357e3",
+        "revCount": 62653,
         "submodules": true,
         "type": "git",
         "url": "https://review.coreboot.org/coreboot.git"
@@ -42,11 +42,11 @@
     "edk2-mrchromebox": {
       "flake": false,
       "locked": {
-        "lastModified": 1771440345,
-        "narHash": "sha256-5MX+2nX/eMMQK50UKSe1HCk6TgAhEKzghUUdFoEB30I=",
+        "lastModified": 1773592277,
+        "narHash": "sha256-bWBZ6iplf1HnaQSEe9besvb98hMozAf591T3y3S/G+E=",
         "ref": "refs/heads/uefipayload_2511",
-        "rev": "a0a230d68efe32792f2cf6ac620978f9bb599e19",
-        "revCount": 35209,
+        "rev": "3b8ec4e6b8a343f1eba92752dcb9aee657d7a4e4",
+        "revCount": 35211,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/MrChromebox/edk2"
@@ -61,11 +61,11 @@
     "edk2-platforms": {
       "flake": false,
       "locked": {
-        "lastModified": 1773085884,
-        "narHash": "sha256-VqyrIGlU34H4wgOK1GJYI5PBHLGWpQ4ZWf/zffPO3Yw=",
+        "lastModified": 1773942432,
+        "narHash": "sha256-LDXcbRcJXDuamcGaK9cGhbqD6ugmTsckJeMV1uPkrGc=",
         "owner": "tianocore",
         "repo": "edk2-platforms",
-        "rev": "a243e267429b9f961632ff8a0a1c64ef9fc82ebd",
+        "rev": "61706acaf4cae9a6a3cdf3998c4d55b886c2e7fc",
         "type": "github"
       },
       "original": {
@@ -108,11 +108,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1772956932,
-        "narHash": "sha256-M0yS4AafhKxPPmOHGqIV0iKxgNO8bHDWdl1kOwGBwRY=",
+        "lastModified": 1774078191,
+        "narHash": "sha256-nyxxxW1/2ouu9dU0I02ul5pHrmUrE1JVFhfFlmYe3Lw=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "608d0cadfed240589a7eea422407a547ad626a14",
+        "rev": "09061f748ee21f68a089cd5d91ec1859cd93d0be",
         "type": "github"
       },
       "original": {
