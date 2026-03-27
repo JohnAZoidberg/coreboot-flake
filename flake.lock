@@ -24,11 +24,11 @@
     "coreboot": {
       "flake": false,
       "locked": {
-        "lastModified": 1774498857,
-        "narHash": "sha256-9ccuReiOcdiOG3thfgKSCvMOTf3ZLDZTevn5XsRnVoc=",
+        "lastModified": 1774592238,
+        "narHash": "sha256-ZHdwdpw4PjHwMiy+f6h85Zy+di7Jr2kvSFn7eBlz/tU=",
         "ref": "refs/heads/main",
-        "rev": "82de37d171135f36344c1beb4493317aeb88f659",
-        "revCount": 62696,
+        "rev": "800d3dbef4069a9e4d35e97af4617c944a82fb06",
+        "revCount": 62698,
         "submodules": true,
         "type": "git",
         "url": "https://review.coreboot.org/coreboot.git"
