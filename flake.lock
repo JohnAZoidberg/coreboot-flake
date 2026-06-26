@@ -24,11 +24,11 @@
     "coreboot": {
       "flake": false,
       "locked": {
-        "lastModified": 1781824451,
-        "narHash": "sha256-rL9txaDXUzjkC2ioYmunoNq2+9rz9wpEJ7z3GZrqOH4=",
+        "lastModified": 1782419058,
+        "narHash": "sha256-Bk3I9pKmY8wVuU3MRkzKqi4LTk6i+5HeIoAFsGng+wQ=",
         "ref": "refs/heads/main",
-        "rev": "5cbf8afc4c08949c9b4ee1cb9dc5439add8a937e",
-        "revCount": 63787,
+        "rev": "d083420fd3215486f80e139bc52a1728755b2d0b",
+        "revCount": 63854,
         "submodules": true,
         "type": "git",
         "url": "https://review.coreboot.org/coreboot.git"
@@ -42,11 +42,11 @@
     "edk2-mrchromebox": {
       "flake": false,
       "locked": {
-        "lastModified": 1779883686,
-        "narHash": "sha256-8jyrdiKwxhArBBJvq4Sx93/DwK4oOlxidkBjKxY1V7o=",
+        "lastModified": 1781871108,
+        "narHash": "sha256-bJDGzyuswT/eJb1hC1Arqje2JVjo+pfXsQ0K5jTDoZo=",
         "ref": "refs/heads/uefipayload_2603",
-        "rev": "7f67831246fce8a24db8cc4fdf36128e230a0d42",
-        "revCount": 35616,
+        "rev": "2bed291ec3bf756702b17d7b9b75c65cfd466f49",
+        "revCount": 35617,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/MrChromebox/edk2"
@@ -108,11 +108,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1781607440,
-        "narHash": "sha256-rxO+uc/KFbSJp+pgyXRuAX6QlG9hJdnt0BXpEQRXY+U=",
+        "lastModified": 1782175435,
+        "narHash": "sha256-EMzXKmnOtBQ2MnvpiNOm7E+kOMvdPrIKaeg52Tip2Uk=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "3e41b24abd260e8f71dbe2f5737d24122f972158",
+        "rev": "89570f24e97e614aa34aa9ab1c927b6578a43775",
         "type": "github"
       },
       "original": {
