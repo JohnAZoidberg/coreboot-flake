@@ -27,5 +27,5 @@
     nixpkgs.url = "github:NixOS/nixpkgs?ref=refs/heads/nixpkgs-unstable";
   };
 
-  outputs = inputs: inputs.blueprint { inherit inputs; };
+  outputs = inputs: inputs.blueprint { inherit inputs; systems = [ "x86_64-linux" ]; };
 }
