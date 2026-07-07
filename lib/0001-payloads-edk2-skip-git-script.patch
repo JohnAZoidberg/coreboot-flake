@@ -1,6 +1,6 @@
-From 1473c4220adaaca5bd79a7a01aceaf2ab7967d08 Mon Sep 17 00:00:00 2001
+From 1a71d31ae4dcc3c2ccd857456b92f8b9de0ed6ef Mon Sep 17 00:00:00 2001
 From: Matei Dibu <contact@mateidibu.dev>
-Date: Wed, 8 Jan 2025 14:58:23 +0200
+Date: Tue, 7 Jul 2026 12:37:32 +0300
 Subject: [PATCH] payloads/edk2: skip git script
 
 the git actions that require network access cannot
@@ -11,10 +11,10 @@ and rely on nix to set things up correctly
  1 file changed, 8 insertions(+)
 
 diff --git a/payloads/external/edk2/Makefile b/payloads/external/edk2/Makefile
-index 6464e9f851..22214f5858 100644
+index 7cac783731..7cab016dd8 100644
 --- a/payloads/external/edk2/Makefile
 +++ b/payloads/external/edk2/Makefile
-@@ -174,6 +174,9 @@ all: UefiPayloadPkg
+@@ -266,6 +266,9 @@ all: UefiPayloadPkg
  $(WORKSPACE):
  	mkdir $(WORKSPACE)
  
@@ -24,7 +24,7 @@ index 6464e9f851..22214f5858 100644
  $(EDK2_PLATFORMS_PATH): $(WORKSPACE)
  	if [ ! -d "$(EDK2_PLATFORMS_PATH)" ]; then \
  		git clone --recurse-submodules $(CONFIG_EDK2_PLATFORMS_REPOSITORY) $(EDK2_PLATFORMS_PATH) -j5; \
-@@ -190,7 +193,11 @@ $(EDK2_PLATFORMS_PATH): $(WORKSPACE)
+@@ -282,7 +285,11 @@ $(EDK2_PLATFORMS_PATH): $(WORKSPACE)
  			echo "    Working directory not clean; will not overwrite"; \
  		fi; \
  		git submodule update --init --checkout
@@ -36,14 +36,14 @@ index 6464e9f851..22214f5858 100644
  $(EDK2_PATH): $(WORKSPACE)
  	if [ ! -d "$(EDK2_PATH)" ]; then \
  		git clone --recurse-submodules $(CONFIG_EDK2_REPOSITORY) $(EDK2_PATH) -j5; \
-@@ -214,6 +221,7 @@ $(EDK2_PATH): $(WORKSPACE)
+@@ -306,6 +313,7 @@ $(EDK2_PATH): $(WORKSPACE)
  			echo "    Working directory not clean; will not overwrite"; \
  		fi; \
- 		git submodule update --init --checkout
+ 		git submodule update --init --checkout --recursive
 +endif
  
  logo: $(EDK2_PATH)
  	case "$(CONFIG_EDK2_BOOTSPLASH_FILE)" in \
 -- 
-2.47.0
+2.54.0
 
