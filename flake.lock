@@ -42,17 +42,17 @@
     "edk2-mrchromebox": {
       "flake": false,
       "locked": {
-        "lastModified": 1782957845,
-        "narHash": "sha256-0pPWRXBTPTrxmMxVjPem5cNCAE7qa5zsFc/j1rDV5Ig=",
-        "ref": "refs/heads/uefipayload_2603",
-        "rev": "1d840d4e6ed0e9a13fee47936c330f4f0cbf6510",
-        "revCount": 35620,
+        "lastModified": 1785965819,
+        "narHash": "sha256-AJr52tVy5kN/09fSLEElkRmjfj9sLTGkueJIeHPW0RQ=",
+        "ref": "refs/heads/uefipayload_2605",
+        "rev": "92584d64c3e808397fba14d700384294d52a46da",
+        "revCount": 36073,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/MrChromebox/edk2"
       },
       "original": {
-        "ref": "refs/heads/uefipayload_2603",
+        "ref": "refs/heads/uefipayload_2605",
         "submodules": true,
         "type": "git",
         "url": "https://github.com/MrChromebox/edk2"
