@@ -1,7 +1,15 @@
 { inputs, ... }:
 {
   mkCorebootEdk2 =
-    { board }:
+    {
+      board,
+      # Boards whose SoC selects USE_X86_64_SUPPORT build their stages with the
+      # x86_64-elf toolchain instead of (or in addition to) i386-elf.
+      x86_64 ? false,
+      # Boards with VBOOT enabled build futility, which links against libcrypto
+      # (util/futility/Makefile.mk refuses to build without it).
+      vboot ? false,
+    }:
     {
       coreboot-toolchain,
       imagemagick,
@@ -9,6 +17,7 @@
       libuuid,
       ncurses,
       nss,
+      openssl,
       pkg-config,
       pkgsBuildBuild,
       python3,
@@ -30,7 +39,9 @@
         nss
         pkg-config
         python3
-      ];
+      ]
+      ++ lib.optional x86_64 coreboot-toolchain.x64
+      ++ lib.optional vboot openssl;
 
       strictDeps = true;
 
@@ -61,6 +72,7 @@
         patchShebangs util/xcompile/xcompile
         patchShebangs util/genbuild_h/genbuild_h.sh
         patchShebangs util/me_cleaner/me_cleaner.py
+        ${lib.optionalString vboot "patchShebangs 3rdparty/vboot/scripts"}
 
         mkdir -p payloads/external/edk2/workspace
 
