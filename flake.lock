@@ -24,11 +24,11 @@
     "coreboot": {
       "flake": false,
       "locked": {
-        "lastModified": 1786073708,
-        "narHash": "sha256-Vj2WrCI2sD79Ycu1d5Sa+jvQBgsF2upRwl6XCFajgWs=",
+        "lastModified": 1787272839,
+        "narHash": "sha256-0cCH9HC+u68q/whXoD9dTxQ6MZTBoAuTSLlDRFxrvoM=",
         "ref": "refs/heads/main",
-        "rev": "12350b0f4885b4e4e31fba74fe57a3888ad85d6d",
-        "revCount": 64559,
+        "rev": "fea4054eb51247c0dda7ee958879c296e27f962e",
+        "revCount": 64769,
         "submodules": true,
         "type": "git",
         "url": "https://review.coreboot.org/coreboot.git"
@@ -61,11 +61,11 @@
     "edk2-platforms": {
       "flake": false,
       "locked": {
-        "lastModified": 1785944419,
-        "narHash": "sha256-1+HaZj6EllGUlMmBnbh95jYxF7LbiCnU6AhTq39LEwA=",
+        "lastModified": 1787148722,
+        "narHash": "sha256-aMSbMyajiRNiRjZSTjQauO8ke05K5QvR1r0gisx/o1s=",
         "owner": "tianocore",
         "repo": "edk2-platforms",
-        "rev": "f8dbb5c603302dc661f572b560bdb34f7db6edb5",
+        "rev": "9377d445f41cbb69addf5eef9e8a53dae4360502",
         "type": "github"
       },
       "original": {
@@ -93,11 +93,11 @@
     "intel-microcode": {
       "flake": false,
       "locked": {
-        "lastModified": 1778545191,
-        "narHash": "sha256-hJfuxnHxHAxoTFAdgzontCl2pl5ad222I8BGyHO+MxQ=",
+        "lastModified": 1786570293,
+        "narHash": "sha256-Rw40SNaVSnGenRIkuspVzsFXt17GxPUTsRP86aMI4RM=",
         "owner": "intel",
         "repo": "Intel-Linux-Processor-Microcode-Data-Files",
-        "rev": "98f8d817ca3d560c48ae988bd805d1b53b48a631",
+        "rev": "927e65c8d5a6e4ec05cc74b1778283ab2284d0c1",
         "type": "github"
       },
       "original": {
@@ -108,11 +108,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1785747939,
-        "narHash": "sha256-D740uKsMbgsfK2oaDenJLLPIZfq7W0/g4KN/Fls8eKs=",
+        "lastModified": 1787172299,
+        "narHash": "sha256-PShzS87awOlE5XWkxUGBd/58/F+AtE2ZMgFffKj4r8s=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "104240a772428cc2e20d8fd86c9ddbb886bbaff2",
+        "rev": "07e1d92cdc0ed416cfa11ff3ca40d17e61cfba7a",
         "type": "github"
       },
       "original": {
