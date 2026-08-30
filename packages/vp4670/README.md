@@ -14,4 +14,7 @@ flashrom -p internal -w coreboot-vp4670.rom
 flashrom -p linux_spi:dev=/dev/spidev0.0,spispeed=49000 -c "MX25L12833F/MX25L12835F/MX25L12845E/MX25L12865E/MX25L12873F" -w coreboot-vp4670.rom
 ```
 
-- by taking out the socketed BIOS chip and using a CH341A
+- by taking out the socketed BIOS chip and using a CH341A:
+```sh
+flashrom -p ch341a_spi -c 'MX25L12835F/MX25L12873F' -w ./result/coreboot.rom
+```
