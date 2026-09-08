@@ -8,11 +8,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1776249299,
-        "narHash": "sha256-Dt9t1TGRmJFc0xVYhttNBD6QsAgHOHCArqGa0AyjrJY=",
+        "lastModified": 1788342924,
+        "narHash": "sha256-Sfyygt2dL88+160d014gaXMlWTGIL2HGxlIzLGsGPvE=",
         "owner": "numtide",
         "repo": "blueprint",
-        "rev": "56131e8628f173d24a27f6d27c0215eff57e40dd",
+        "rev": "8be75245e274a789b87cc4df542abbcd8c5e7f93",
         "type": "github"
       },
       "original": {
@@ -24,11 +24,11 @@
     "coreboot": {
       "flake": false,
       "locked": {
-        "lastModified": 1788085491,
-        "narHash": "sha256-758vt8cbHaID+mXBOiTjXLg3o1LbTi0aHUsQlFx7GBA=",
+        "lastModified": 1788832927,
+        "narHash": "sha256-4zgfdZ7SeF4x7f5J051L/IRS3vVMzz2rh3q8ST4ZfoE=",
         "ref": "refs/heads/main",
-        "rev": "f99654c6b9e92536c38b9cc0905ad5d97836cd2a",
-        "revCount": 64850,
+        "rev": "a23660675cbccd8323afdc1f23aa161bff1a33b7",
+        "revCount": 64915,
         "submodules": true,
         "type": "git",
         "url": "https://review.coreboot.org/coreboot.git"
@@ -61,11 +61,11 @@
     "edk2-platforms": {
       "flake": false,
       "locked": {
-        "lastModified": 1787726540,
-        "narHash": "sha256-GlLMZEijpV78hXP2jXttZAGBtoZ0mLpzRSwMmuQYSjY=",
+        "lastModified": 1788392891,
+        "narHash": "sha256-/7YKRcuHUmdfGQkTShIN/U5fmQPgaLKDYtgK3CJr3yM=",
         "owner": "tianocore",
         "repo": "edk2-platforms",
-        "rev": "04da1a0b341543e773485893bc5cef3443a86a76",
+        "rev": "061beb4c4bd259c073743f5ac01b5a1da4ce2010",
         "type": "github"
       },
       "original": {
@@ -77,11 +77,11 @@
     "intel-fsp": {
       "flake": false,
       "locked": {
-        "lastModified": 1787732285,
-        "narHash": "sha256-5qYYFt2VWKOlbSPUz2LLgbrk+643dX9imCewwVyT7BY=",
+        "lastModified": 1788510848,
+        "narHash": "sha256-w6ny/lQK8JBR0bE8ck0F+txZd4bbt6OmYZoakEokvys=",
         "owner": "intel",
         "repo": "FSP",
-        "rev": "5a2795469c47874ed956524b749d5666018d67cc",
+        "rev": "e5a1f82272484435852f916f31e27769d1ee3caa",
         "type": "github"
       },
       "original": {
@@ -108,11 +108,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1787964612,
-        "narHash": "sha256-0N9nghg3nwzX6b6qc77EzjR9cu/Z+UR66FlfsCqiURs=",
+        "lastModified": 1788746152,
+        "narHash": "sha256-RaKngusl5I8pNi8RfrVvsHq3NZe7eFWzDlb01+hEVqY=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "e8be7818e19ada32105a8af937a6a473b38167ca",
+        "rev": "42f17a57f4f6e33b3de3dca0a2a5ea5233169d02",
         "type": "github"
       },
       "original": {
