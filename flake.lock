@@ -52,7 +52,6 @@
         "url": "https://github.com/MrChromebox/edk2"
       },
       "original": {
-        "ref": "refs/heads/uefipayload_2605",
         "submodules": true,
         "type": "git",
         "url": "https://github.com/MrChromebox/edk2"
