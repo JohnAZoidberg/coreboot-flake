@@ -24,16 +24,17 @@
     "coreboot": {
       "flake": false,
       "locked": {
-        "lastModified": 1790061220,
-        "narHash": "sha256-hRwcv4YSBuyeHWiCV2wgQL73xnGjHpjks1D7ZmkHtWI=",
-        "ref": "refs/heads/main",
-        "rev": "260b0ab46efd1fd26c2ccdb38d309af87f654027",
-        "revCount": 65053,
+        "lastModified": 1790276359,
+        "narHash": "sha256-Uf+XrL7dU+lsXaKtnWQUfQdJjayNiU2q86jW8QVyacE=",
+        "ref": "refs/tags/26.09",
+        "rev": "8b0e34f90e08547cf19e550a43ed72f69c39d6ed",
+        "revCount": 65111,
         "submodules": true,
         "type": "git",
         "url": "https://review.coreboot.org/coreboot.git"
       },
       "original": {
+        "ref": "refs/tags/26.09",
         "submodules": true,
         "type": "git",
         "url": "https://review.coreboot.org/coreboot.git"
@@ -42,16 +43,17 @@
     "edk2-mrchromebox": {
       "flake": false,
       "locked": {
-        "lastModified": 1787587618,
-        "narHash": "sha256-RI5OM1LuhOH4AR/3DJEJDF3wODzTSevDoLYy+Pqr7PQ=",
-        "ref": "refs/heads/uefipayload_2605",
-        "rev": "ac7f573852a6e17de85c76070ded2ddd6705291d",
-        "revCount": 36074,
+        "lastModified": 1789792746,
+        "narHash": "sha256-43bvPHoJDK+txBU5rika9Z90zL4z/GnSRabUSqmHqnQ=",
+        "ref": "refs/tags/26.09.1",
+        "rev": "57642656c3ddc5d55aeb2e8c3fb86c81276da4a7",
+        "revCount": 36617,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/MrChromebox/edk2"
       },
       "original": {
+        "ref": "refs/tags/26.09.1",
         "submodules": true,
         "type": "git",
         "url": "https://github.com/MrChromebox/edk2"
@@ -60,11 +62,11 @@
     "edk2-platforms": {
       "flake": false,
       "locked": {
-        "lastModified": 1790057969,
-        "narHash": "sha256-B9OF6suTjGUq5zgeNY38Zwimz/6Vk/Xo4Zg63gELKwk=",
+        "lastModified": 1790270740,
+        "narHash": "sha256-8+YUhhYcLQsCOx45cww4sr/1TnKiLGm5AnKq2dz6g2U=",
         "owner": "tianocore",
         "repo": "edk2-platforms",
-        "rev": "c98cdf8de9bd84a3267623e64f4388e21de69512",
+        "rev": "9c2cdde2d73d6bf0261e57b79bfb68cd98fccc1f",
         "type": "github"
       },
       "original": {
@@ -107,16 +109,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1789960332,
-        "narHash": "sha256-MQ5my6vvo0z2iVQcKqrysutFWvsNw3/ynNxzjJon4yc=",
-        "owner": "NixOS",
+        "lastModified": 1790326036,
+        "narHash": "sha256-VWiphHmMkncqJM/hSipxaw3is+4q+XC+W1MutYeFqFk=",
+        "owner": "matdibu",
         "repo": "nixpkgs",
-        "rev": "35e212742ceab4ae1dcfbfd9039a39215c816e8e",
+        "rev": "c21bdf82197a67d939f401a3c87ac5e54275860a",
         "type": "github"
       },
       "original": {
-        "owner": "NixOS",
-        "ref": "refs/heads/nixpkgs-unstable",
+        "owner": "matdibu",
+        "ref": "refs/heads/coreboot-toolchain-26.09",
         "repo": "nixpkgs",
         "type": "github"
       }
