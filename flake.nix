@@ -27,5 +27,10 @@
     nixpkgs.url = "github:matdibu/nixpkgs?ref=refs/heads/coreboot-toolchain-26.09";
   };
 
-  outputs = inputs: inputs.blueprint { inherit inputs; systems = [ "x86_64-linux" ]; };
+  outputs =
+    inputs:
+    inputs.blueprint {
+      inherit inputs;
+      systems = [ "x86_64-linux" ];
+    };
 }

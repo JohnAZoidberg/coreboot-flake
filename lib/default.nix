@@ -47,21 +47,20 @@
 
       enableParallelBuilding = true;
 
-      patches =
-        [
-          ./0001-payloads-edk2-skip-git-script.patch
-        ]
-        ++ (
-          let
-            boardPatchesDir = ../packages/${board}/patches;
-            boardPatches = lib.pipe boardPatchesDir [
-              builtins.readDir
-              builtins.attrNames
-              (builtins.map (patchName: /${boardPatchesDir}/${patchName}))
-            ];
-          in
-          if (builtins.pathExists boardPatchesDir) then boardPatches else [ ]
-        );
+      patches = [
+        ./0001-payloads-edk2-skip-git-script.patch
+      ]
+      ++ (
+        let
+          boardPatchesDir = ../packages/${board}/patches;
+          boardPatches = lib.pipe boardPatchesDir [
+            builtins.readDir
+            builtins.attrNames
+            (builtins.map (patchName: /${boardPatchesDir}/${patchName}))
+          ];
+        in
+        if (builtins.pathExists boardPatchesDir) then boardPatches else [ ]
+      );
 
       postPatch = ''
         cp -r ${../packages/${board}}/* ./
