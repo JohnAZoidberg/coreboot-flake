@@ -24,6 +24,14 @@
       stdenvNoCC,
       ...
     }:
+    assert
+      let
+        arches = lib.subtractLists [ "override" "overrideDerivation" "recurseForDerivations" ] (
+          builtins.attrNames coreboot-toolchain
+        );
+      in
+      lib.assertMsg (builtins.elem arch arches) "coreboot-toolchain is not available for ${arch}, use one of ${builtins.concatStringsSep ", " arches}";
+
     stdenvNoCC.mkDerivation {
       pname = "coreboot-${board}";
       version = inputs.coreboot.shortRev;

@@ -10,4 +10,4 @@ update *ARGS:
     git commit -m 'nix flake update'
 
 check *ARGS:
-    nix flake check {{ ARGS }}
+    nix flake check --max-jobs 1 {{ ARGS }}
