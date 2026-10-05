@@ -40,7 +40,6 @@
 
       depsBuildBuild = [
         pkgsBuildBuild.stdenv.cc
-        coreboot-toolchain.i386
         coreboot-toolchain.${arch}
         imagemagick
         libuuid
