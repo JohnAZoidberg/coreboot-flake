@@ -5,11 +5,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     coreboot = {
-      url = "git+https://review.coreboot.org/coreboot.git?submodules=1&ref=refs/tags/26.09";
+      url = "git+https://review.coreboot.org/coreboot.git?submodules=1&ref=refs/changes/41/96041/1";
       flake = false;
     };
     edk2-mrchromebox = {
-      url = "git+https://github.com/MrChromebox/edk2?submodules=1&ref=refs/tags/26.09.1";
+      url = "git+https://github.com/MrChromebox/edk2?submodules=1";
       flake = false;
     };
     intel-microcode = {
@@ -20,7 +20,7 @@
       url = "github:intel/FSP";
       flake = false;
     };
-    nixpkgs.url = "github:matdibu/nixpkgs?ref=refs/heads/coreboot-toolchain-26.09";
+    nixpkgs.url = "github:NixOS/nixpkgs?ref=refs/heads/nixpkgs-unstable";
   };
 
   outputs =
