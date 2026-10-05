@@ -5,7 +5,7 @@
       board,
       # Boards whose SoC selects USE_X86_64_SUPPORT build their stages with the
       # x86_64-elf toolchain instead of (or in addition to) i386-elf.
-      x86_64 ? false,
+      arch ? "i386",
       # Boards with VBOOT enabled build futility, which links against libcrypto
       # (util/futility/Makefile.mk refuses to build without it).
       vboot ? false,
@@ -33,6 +33,7 @@
       depsBuildBuild = [
         pkgsBuildBuild.stdenv.cc
         coreboot-toolchain.i386
+        coreboot-toolchain.${arch}
         imagemagick
         libuuid
         ncurses
@@ -40,7 +41,6 @@
         pkg-config
         python3
       ]
-      ++ lib.optional x86_64 coreboot-toolchain.x64
       ++ lib.optional vboot openssl;
 
       strictDeps = true;
