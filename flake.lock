@@ -59,22 +59,6 @@
         "url": "https://github.com/MrChromebox/edk2"
       }
     },
-    "edk2-platforms": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1790270740,
-        "narHash": "sha256-8+YUhhYcLQsCOx45cww4sr/1TnKiLGm5AnKq2dz6g2U=",
-        "owner": "tianocore",
-        "repo": "edk2-platforms",
-        "rev": "9c2cdde2d73d6bf0261e57b79bfb68cd98fccc1f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "tianocore",
-        "repo": "edk2-platforms",
-        "type": "github"
-      }
-    },
     "intel-fsp": {
       "flake": false,
       "locked": {
@@ -128,7 +112,6 @@
         "blueprint": "blueprint",
         "coreboot": "coreboot",
         "edk2-mrchromebox": "edk2-mrchromebox",
-        "edk2-platforms": "edk2-platforms",
         "intel-fsp": "intel-fsp",
         "intel-microcode": "intel-microcode",
         "nixpkgs": "nixpkgs"

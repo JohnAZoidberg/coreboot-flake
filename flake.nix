@@ -8,10 +8,6 @@
       url = "git+https://review.coreboot.org/coreboot.git?submodules=1&ref=refs/tags/26.09";
       flake = false;
     };
-    edk2-platforms = {
-      url = "github:tianocore/edk2-platforms";
-      flake = false;
-    };
     edk2-mrchromebox = {
       url = "git+https://github.com/MrChromebox/edk2?submodules=1&ref=refs/tags/26.09.1";
       flake = false;

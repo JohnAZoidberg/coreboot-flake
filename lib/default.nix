@@ -34,13 +34,13 @@
 
     stdenvNoCC.mkDerivation {
       pname = "coreboot-${board}";
-      version = inputs.coreboot.shortRev;
+      version = "${inputs.coreboot.shortRev}-${inputs.edk2-mrchromebox.shortRev}";
 
       src = inputs.coreboot;
 
       depsBuildBuild = [
         pkgsBuildBuild.stdenv.cc
-        coreboot-toolchain.${arch}
+        coreboot-toolchain.i386
         imagemagick
         libuuid
         ncurses
@@ -48,6 +48,7 @@
         pkg-config
         python3
       ]
+      ++ lib.optional (arch == "x64") coreboot-toolchain.${arch}
       ++ lib.optional vboot openssl;
 
       strictDeps = true;
@@ -71,6 +72,7 @@
 
       postPatch = ''
         cp -r ${../packages/${board}}/* ./
+        chmod 0644 defconfig
 
         cp -r ${inputs.intel-fsp}/*       ./3rdparty/fsp/
         cp -r ${inputs.intel-microcode}/* ./3rdparty/intel-microcode/
@@ -78,27 +80,31 @@
         patchShebangs util/xcompile/xcompile
         patchShebangs util/genbuild_h/genbuild_h.sh
         patchShebangs util/me_cleaner/me_cleaner.py
+        patchShebangs util/scripts/config
         ${lib.optionalString vboot "patchShebangs 3rdparty/vboot/scripts"}
 
         mkdir -p payloads/external/edk2/workspace
 
-        cp -r ${inputs.edk2-platforms} payloads/external/edk2/workspace/edk2-platforms
-        chmod -R +w                    payloads/external/edk2/workspace/edk2-platforms
+        cp -r ${inputs.edk2-mrchromebox} payloads/external/edk2/workspace/mrchromebox
+        chmod -R +w                      payloads/external/edk2/workspace/mrchromebox
 
-        cp -r ${inputs.edk2-mrchromebox} payloads/external/edk2/workspace/MrChromebox
-        chmod -R +w                      payloads/external/edk2/workspace/MrChromebox
-
-        patchShebangs payloads/external/edk2/workspace/MrChromebox/BaseTools/BinWrappers/PosixLike
+        patchShebangs payloads/external/edk2/workspace/mrchromebox/BaseTools/BinWrappers/PosixLike
 
         # https://github.com/tianocore/edk2/issues/6135
-        substituteInPlace payloads/external/edk2/workspace/MrChromebox/UefiPayloadPkg/UefiPayloadPkg.dsc \
+        substituteInPlace payloads/external/edk2/workspace/mrchromebox/UefiPayloadPkg/UefiPayloadPkg.dsc \
             --replace-fail 'Build/UefiPayloadPkg$(BUILD_ARCH)' 'Build/UefiPayloadPkgX64'
       '';
 
       configurePhase = ''
         runHook preConfigure
         cp defconfig .config
+        ./util/scripts/config \
+            --enable  PAYLOAD_EDK2 \
+            --disable EDK2_REPO_OFFICIAL \
+            --enable  EDK2_REPO_MRCHROMEBOX \
+            --set-str EDK2_TAG_OR_REV "${inputs.edk2-mrchromebox.rev}"
         make -j$NIX_BUILD_CORES olddefconfig
+        make savedefconfig
         runHook postConfigure
       '';
 
@@ -129,7 +135,7 @@
 
       installPhase = ''
         runHook preInstall
-        install -D -m 0644 --target-directory=$out build/coreboot.rom .config
+        install -D -m 0644 --target-directory="$out" build/coreboot.rom .config defconfig
         runHook postInstall
       '';
     };
