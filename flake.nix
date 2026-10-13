@@ -5,7 +5,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     coreboot = {
-      url = "git+https://review.coreboot.org/coreboot.git?submodules=1&ref=refs/changes/41/96041/1";
+      url = "git+https://review.coreboot.org/coreboot.git?submodules=1";
       flake = false;
     };
     edk2-mrchromebox = {
