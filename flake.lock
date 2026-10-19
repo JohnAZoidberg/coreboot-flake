@@ -8,11 +8,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1788342924,
-        "narHash": "sha256-Sfyygt2dL88+160d014gaXMlWTGIL2HGxlIzLGsGPvE=",
+        "lastModified": 1791920352,
+        "narHash": "sha256-Zbd0CGR2Dh9USbYglGXQ09FJXxxKkD5w5vi99nlz1yE=",
         "owner": "numtide",
         "repo": "blueprint",
-        "rev": "8be75245e274a789b87cc4df542abbcd8c5e7f93",
+        "rev": "2bf123541bd5024046f32299c9f8a6cc6bdd8a9f",
         "type": "github"
       },
       "original": {
@@ -24,11 +24,11 @@
     "coreboot": {
       "flake": false,
       "locked": {
-        "lastModified": 1791829258,
-        "narHash": "sha256-KX1y/S14EaQnLS+blwcIWkQ6PxMDDaAP5h+AZFyh7Es=",
+        "lastModified": 1792351530,
+        "narHash": "sha256-1r9PQ5HUdkpf6sOVv2DoRJzC1h0c5t6iL2NiEBqz87M=",
         "ref": "refs/heads/main",
-        "rev": "d20b38fb35d0811117f66636151dccc97cff7b6c",
-        "revCount": 65337,
+        "rev": "a36dc936968c198bc45018843ada22680dd85a2e",
+        "revCount": 65435,
         "submodules": true,
         "type": "git",
         "url": "https://review.coreboot.org/coreboot.git"
@@ -42,11 +42,11 @@
     "edk2-mrchromebox": {
       "flake": false,
       "locked": {
-        "lastModified": 1791820256,
-        "narHash": "sha256-jN6FZPE8p5B52kqzXqmNHLWnZ/FdNSSsxReJg+s7TEM=",
+        "lastModified": 1792097622,
+        "narHash": "sha256-0cFKTBf37ewWrBcp7CdZK4+4mM6Kxlm0DLyMXDY6ov8=",
         "ref": "refs/heads/uefipayload_2608",
-        "rev": "0d39245e631103f44313122ee8eacf923aa287aa",
-        "revCount": 36625,
+        "rev": "f7cbaab0d5a224d15a144c049fc83f8d730b45fb",
+        "revCount": 36634,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/MrChromebox/edk2"
@@ -91,11 +91,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1791487292,
-        "narHash": "sha256-tqM7xDEsaeK1p6VvRygeZ9LkQRpUUkbRT02BHv6hnTM=",
+        "lastModified": 1792116957,
+        "narHash": "sha256-EjZqHKObBfIOeHZnMRVV87HB3pPq/WBkmRJWyFxmZu8=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "8edc0c72e3a38faf5434e40d1f19431125fe4b30",
+        "rev": "f20cd90e28fe0403873f473b29e42662cd86e8c4",
         "type": "github"
       },
       "original": {
