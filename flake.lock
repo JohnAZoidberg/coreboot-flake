@@ -24,11 +24,11 @@
     "coreboot": {
       "flake": false,
       "locked": {
-        "lastModified": 1792351530,
-        "narHash": "sha256-1r9PQ5HUdkpf6sOVv2DoRJzC1h0c5t6iL2NiEBqz87M=",
+        "lastModified": 1794504523,
+        "narHash": "sha256-sBWgEINSpXGymkqN76nMC3gQFWg6OxLoCrZNum7cUug=",
         "ref": "refs/heads/main",
-        "rev": "a36dc936968c198bc45018843ada22680dd85a2e",
-        "revCount": 65435,
+        "rev": "63e9cfb02b15c1ee1814bafa4b022b4153687b29",
+        "revCount": 65762,
         "submodules": true,
         "type": "git",
         "url": "https://review.coreboot.org/coreboot.git"
@@ -42,11 +42,11 @@
     "edk2-mrchromebox": {
       "flake": false,
       "locked": {
-        "lastModified": 1792097622,
-        "narHash": "sha256-0cFKTBf37ewWrBcp7CdZK4+4mM6Kxlm0DLyMXDY6ov8=",
+        "lastModified": 1793144461,
+        "narHash": "sha256-ZvcCfb7vJBOYPYzYI0H5czgOHfizJnMmmEtsabA5e9g=",
         "ref": "refs/heads/uefipayload_2608",
-        "rev": "f7cbaab0d5a224d15a144c049fc83f8d730b45fb",
-        "revCount": 36634,
+        "rev": "6c14abf865e093452edc775651df61775bf99c9f",
+        "revCount": 36637,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/MrChromebox/edk2"
@@ -60,11 +60,11 @@
     "intel-fsp": {
       "flake": false,
       "locked": {
-        "lastModified": 1791182708,
-        "narHash": "sha256-XRlbEzxVeEgx3VqEdn9YYG+SS9019K0pJ3LvJ6K9x+0=",
+        "lastModified": 1793584761,
+        "narHash": "sha256-XDHpe7/qSqO5qx12IlziPCwzy9yjNjka15aWvlBHO58=",
         "owner": "intel",
         "repo": "FSP",
-        "rev": "d901c9458288e1a0eb0ec9901efcd2ddfaa01cb8",
+        "rev": "dbbe74b94666d495573c4057e10af5b6d2d21e44",
         "type": "github"
       },
       "original": {
@@ -76,11 +76,11 @@
     "intel-microcode": {
       "flake": false,
       "locked": {
-        "lastModified": 1790365479,
-        "narHash": "sha256-FR3MB7lA6gaJD/cbTTOxqrQaksr9jXpowtmuFWaHoTs=",
+        "lastModified": 1794327783,
+        "narHash": "sha256-mEf3UwOX1JSb2ELgacj7Wmnm3HYEpFzAlCdgSmsnC7Y=",
         "owner": "intel",
         "repo": "Intel-Linux-Processor-Microcode-Data-Files",
-        "rev": "bdc92abe5c499c3fd7988b76a128d05c9120a520",
+        "rev": "d71fe4e2f0f70a49ebbac7f2c7e915f181361974",
         "type": "github"
       },
       "original": {
@@ -91,11 +91,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1792116957,
-        "narHash": "sha256-EjZqHKObBfIOeHZnMRVV87HB3pPq/WBkmRJWyFxmZu8=",
+        "lastModified": 1794408178,
+        "narHash": "sha256-OUDRQTMmN/6cQ/ebDsazUmLj84RxSLaHznKv5As9E1k=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "f20cd90e28fe0403873f473b29e42662cd86e8c4",
+        "rev": "9397dcb09c9598a33509fbc0cce699bd4e6c84d5",
         "type": "github"
       },
       "original": {
